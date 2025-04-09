@@ -9,3 +9,6 @@
 !.vscode/*.code-snippets
 
 package-lock.json
+
+/tastebud-app/node_modules
+/tastebud-app/package-lock.json
