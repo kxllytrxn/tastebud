@@ -1,18 +1,18 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-import Navbar from './components/Navbar/Navbar'
-import Home from './pages/Home.jsx';
-// import NotFound from './pages/NotFound'
+import AppRoutes from '@/AppRoutes'
+import Navbar from '@/components/NavBar/Navbar'
+import { useLocation } from 'react-router-dom';
 
 const App = () => {
-  return (
-    <div>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-      </Routes>
-    </div>
-  )
-}
-
-export default App
+    const location = useLocation()
+    const hideNavbarRoutes = ['/login', '/signup']
+    const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname)
+    return (
+      <>
+        {!shouldHideNavbar && <Navbar />}
+        <AppRoutes />
+      </>
+    )
+  }
+  
+  export default App

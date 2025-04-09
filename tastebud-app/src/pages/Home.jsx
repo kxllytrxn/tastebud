@@ -1,7 +1,8 @@
-import React from "react";
-import "../main.css";
+import React from 'react';
+import Post from '@/components/Post/Post';
+import '@/main.css';
 
-// Placeholder Components – you can replace with actual ones later
+// Placeholder Components - TODO: REMOVE LATER
 const SidebarProfile = () => (
   <div className="sidebar">
     <div className="card">
@@ -80,6 +81,7 @@ const Home = () => {
       <SidebarProfile />
       <main>
         <CreatePost />
+        <Post />
         <PostItem />
         <PostItem />
       </main>
