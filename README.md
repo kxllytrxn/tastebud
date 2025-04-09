@@ -1,2 +1,2 @@
-# tastebud
-CS160's Project - Tastebud
+# Tastebud
+CS160 Final Group Project - Tastebud
