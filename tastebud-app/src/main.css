@@ -1,7 +1,7 @@
 /* Used for formatting, shared colors/fonts, and any overall styling that is mostly used */
 
 body {
-    font-family: Arial, sans-serif;
+    font-family:'Inter', 'Outfit', 'Roboto', sans-serif;
     background-color: #f9fafb;
     margin: 0;
     padding: 0;
@@ -71,4 +71,8 @@ body {
   
   .sidebar-list li {
     margin-bottom: 8px;
+  }
+  .btn-create-post {
+    border: 1px solid black;
+    width: 70%;
   }
