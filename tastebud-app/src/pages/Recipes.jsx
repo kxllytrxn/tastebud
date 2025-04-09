@@ -1,7 +1,8 @@
 import React from 'react';
 import '@/main.css';
 
-const UserProfile = () => {
+
+const Recipes = () => {
     
     return (
       <div>
@@ -10,4 +11,4 @@ const UserProfile = () => {
     )
   }
   
-  export default UserProfile;
+  export default Recipes;

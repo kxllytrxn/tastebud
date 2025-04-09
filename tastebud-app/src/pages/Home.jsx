@@ -1,8 +1,8 @@
 import React from 'react';
 import Post from '@/components/Post/Post';
-import '../main.css';
+import '@/main.css';
 
-// Placeholder Components 
+// Placeholder Components - TODO: REMOVE LATER
 const SidebarProfile = () => (
   <div className="sidebar">
     <div className="card">
