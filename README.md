@@ -1,7 +1,7 @@
 # Tastebud
 CS160 Final Group Project - Tastebud
 
-Tastebud is a food sharing and recipe discovery platform that allows users to interact with others through home-cooking.
+Tastebud is a food sharing and recipe discovery platform that allows users to interact with others through home-cooking. <3
 
 
 # To run locally:
@@ -16,6 +16,7 @@ Once you've cloned this repo, run these commands:
   npm run dev
 ```
 The app should be running on your localhost now!
+Make sure to `git fetch` and `git pull main` everytime a new push / PR is merged.
 
 # How the Repo is Structured:
 The `tastebud-app/` directory contains the entire application code. Here's a breakdown of how the project is organized:
@@ -28,8 +29,8 @@ This holds all of our code (where we'll be working!)
     * **`IconButton/`**: A button component that displays icons; used for liking, commenting, etc
     * **`Post/`**: A component that displays individual posts; used for `Home/Userpage.jsx`
     * **`Recipe/`**: A reusable component to show recipes; used in `Recipe.jsx`
-
     * **`Comment/`**: A component to hold comments; used on a `Post.jsx `component
+
 
 - **`/pages`**: Contains the main views or pages of the app, each corresponding to a route. 
     * **`Login.jsx`**: holds login page, but also allow sign ups; will be main page 
