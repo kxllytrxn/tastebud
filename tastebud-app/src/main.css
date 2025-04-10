@@ -1,4 +1,54 @@
 /* Used for formatting, shared colors/fonts, and any overall styling that is mostly used */
+/* ========== colors ========== */
+:root {
+    --orange: #F26733;
+    --orange-opacity: rgba(242, 103, 51, 0.7);
+    --green: #397637;
+    --yellow: #FEA914;
+    --black: #2D2D2D;
+    --warm-grey: #E8E7E5;
+    --white: #FFFFFF;
+  }
+
+  
+/* ========== fonts/typography ========== */
+body {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    color: var(--black);
+    background-color: var(--white);
+    margin: 0;
+    padding: 0;
+  }
+
+
+/* Headings */
+h1 {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+h4 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Paragraph / Body Text */
+p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.6;
+}
 
 body {
     font-family:'Inter', 'Outfit', 'Roboto', sans-serif;
@@ -76,3 +126,22 @@ body {
     border: 1px solid black;
     width: 70%;
   }
+
+
+/* Recipe Page Styling*/
+.recipe-page {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: row;
+    column-gap: 5%;
+    margin: 5% 2%;
+}
+.recipe-container {
+    display: flex;
+    width: 900px;
+    column-gap: 2%;  
+    row-gap: 2%;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}

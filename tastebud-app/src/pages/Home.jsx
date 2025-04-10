@@ -1,26 +1,9 @@
 import React from 'react';
 import Post from '@/components/Post/Post';
+import SideBarUser from '@/components/SideBarUser/SideBarUser.jsx';
 import '@/main.css';
 
 // Placeholder Components - TODO: REMOVE LATER
-const SidebarProfile = () => (
-  <div className="sidebar">
-    <div className="card">
-      <div
-        className="card-img"
-        style={{
-          height: "160px",
-          backgroundColor: "#e5e7eb",
-          borderRadius: "8px",
-          marginBottom: "16px",
-        }}
-      />
-      <p className="card-title">John Doe</p>
-      <p className="card-text">40 followers | 23 following</p>
-      <p className="card-text">Last Meal Posted: Yesterday</p>
-    </div>
-  </div>
-);
 
 const CreatePost = () => (
   <div className="card">
@@ -78,7 +61,12 @@ const RightSidebar = () => (
 const Home = () => {
   return (
     <div className="container">
-      <SidebarProfile />
+        <SideBarUser 
+            name="John Doe"
+            followers={40}
+            following={23}
+            lastMealDate="April 10, 2025"
+        />      
       <main>
         <CreatePost />
         <Post />
