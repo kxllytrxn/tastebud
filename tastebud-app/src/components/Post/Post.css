@@ -1,3 +1,135 @@
-.post-card {
+.post-header {
     display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    background: #ccc;
+    border-radius: 9999px;
+    flex-shrink: 0;
+}
+
+.post-header-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.username {
+    font-weight: 600;
+    font-size: 1rem;
+    font-family: 'Inter',
+}
+
+.timestamp {
+    font-size: 0.75rem;
+    color: #E8E7E5;
+    margin-top: 2px;
+    font-family: 'Inter', sans-serif;
+}
+
+.post-card-title {
+    text-align: left;
+    font-size: 1.5rem;
+}
+
+.post-card-img {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin: 12px 0;
+    display: flex;
+}
+
+.post-description {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.5;
+    margin: 0.5rem 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.comment {
+    background-color: #E8E7E5;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    margin-top: 0.75rem;
+}
+
+.avatar.small {
+    width: 36px;
+    height: 36px;
+    background: #ccc;
+    border-radius: 9999px;
+    flex-shrink: 0;
+}
+
+.comment-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.comment-author {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #2D2D2D;
+    font-family: 'Inter', sans-serif;
+}
+
+.comment-text {
+    font-size: 0.85rem;
+    color: #555;
+    font-family: 'Inter', sans-serif;
+    margin-top: 2px;
+}
+
+.post-menu-container {
+    position: relative;
+    margin-left: auto;
+}
+
+.menu-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #2D2D2D;
+}
+
+.menu-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.menu-dropdown button {
+    background: none;
+    border: none;
+    padding: 0.5rem 1rem;
+    text-align: left;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: #2D2D2D;
+}
+
+.menu-dropdown button:hover {
+    background-color: #E8E7E5;
 }

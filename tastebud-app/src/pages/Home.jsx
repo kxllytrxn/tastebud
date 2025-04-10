@@ -81,7 +81,10 @@ const Home = () => {
       <SidebarProfile />
       <main>
         <CreatePost />
-        <Post />
+        <Post 
+          image="https://www.thedietchefs.com/wp-content/uploads/2024/01/Salmon-and-rice-735x1103.jpg" 
+          comment={{ name: "James Doe", text: "Looks great!" }}
+        />
         <PostItem />
         <PostItem />
       </main>
