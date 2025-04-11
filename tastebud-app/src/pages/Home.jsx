@@ -1,6 +1,7 @@
 import React from 'react';
 import Post from '@/components/Post/Post';
 import SideBarUser from '@/components/SideBarUser/SideBarUser.jsx';
+import IconButton from '@/components/Button/IconButton';
 import '@/main.css';
 
 // Placeholder Components - TODO: REMOVE LATER
@@ -19,10 +20,10 @@ const PostItem = () => (
       className="card-img"
       style={{ height: "192px", backgroundColor: "#e5e7eb", margin: "8px 0" }}
     />
-    <div className="card-footer">
-      <button>🔗</button>
-      <button>🤍</button>
-      <button>💬</button>
+    <div className="card-footer icon-buttons-container">
+      <IconButton icon="🔗" onClick={() => console.log('Share clicked')} />
+      <IconButton icon="🤍" onClick={() => console.log('Like clicked')} />
+      <IconButton icon="💬" onClick={() => console.log('Comment clicked')} />
     </div>
     <div className="card-text">James Doe commented...</div>
   </div>
