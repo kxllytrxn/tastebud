@@ -10,31 +10,38 @@ const Recipes = () => {
           id: 0,
           title: 'Vegan Chili',
           description: 'A delicious and hearty chili made with black beans and sweet potatoes.',
-          image: 'https://source.unsplash.com/featured/?chili',
+          image: 'https://frommybowl.com/wp-content/uploads/2019/01/Easy_Vegan_Chili_OilFree_FromMyBowl-4.jpg',
         },
         {
-          id: 1,
-          title: 'Pesto Pasta',
-          description: 'Creamy basil pesto tossed with fettuccine and cherry tomatoes.',
-          image: 'https://source.unsplash.com/featured/?pesto,pasta',
-        },
+            id: 1,
+            title: 'Pesto Pasta',
+            description: 'Creamy basil pesto tossed with fettuccine and cherry tomatoes.',
+            image: 'https://cdn77-s3.lazycatkitchen.com/wp-content/uploads/2018/04/vegan-pesto-pasta-bowl-1000x1500.jpg',
+          },
         {
-          id: 2,
-          title: 'Salmon + Rice',
-          description: 'Miso flavored salmon, air-fried paired with white rice.',
-          image: 'https://source.unsplash.com/featured/?salmon,rice',
-        },
+            id: 2,
+            title: 'Salmon + Rice',
+            description: 'Miso flavored salmon, air-fried paired with white rice.',
+            image: 'https://assets.epicurious.com/photos/5f32b611f1722a2c13407e4e/1:1/w_2560%2Cc_limit/miso-glazed-salmon-recipe-BA-081120.jpg',
+            instructions: [
+              "Cook the rice.",
+              "Pat the salmon fillets dry and season with garlic powder, paprika, salt, and pepper.",
+              "Heat olive oil in a pan over medium heat.",
+              "Place salmon skin-side down and cook for 3–4 minutes until crispy.",
+              "Flip, add butter and lemon slices, and cook for another 3–4 minutes until the salmon is opaque."
+            ],
+        },        
         {
-          id: 3,
-          title: 'Avocado Toast',
-          description: 'Toasted sourdough topped with mashed avocado and a sprinkle of chili flakes.',
-          image: 'https://source.unsplash.com/featured/?avocado,toast',
-        },
+            id: 3,
+            title: 'Avocado Toast',
+            description: 'Toasted sourdough topped with mashed avocado and a sprinkle of chili flakes.',
+            image: 'https://alegumeaday.com/wp-content/uploads/2024/03/Bean-avocado-toast-3.jpg',
+          },
         {
           id: 4,
           title: 'Bibimbap Bowl',
           description: 'Korean rice bowl with sautéed veggies, fried egg, and gochujang sauce.',
-          image: 'https://source.unsplash.com/featured/?bibimbap',
+          image: 'https://iheartumami.com/wp-content/uploads/2021/04/Keto-Korean-Bibimbap-Recipe-Vegetarian-I-Heart-Umami.jpg',
         },
         {
           id: 5,
@@ -84,6 +91,7 @@ const Recipes = () => {
                     title={recipe.title}
                     description={recipe.description}
                     imageUrl={recipe.image}
+                    instructions={recipe.instructions}
                     />
                 ))}
             </div>

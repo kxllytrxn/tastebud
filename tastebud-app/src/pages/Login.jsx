@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { loginUser } from '@/utils/auth'
+import { loginUser, printLocalStorage } from '@/utils/auth'
+
 
 const Login = () => {
-    const [emailOrUsername, setEmailOrUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
             
     const handleLogin = (e) => {
         e.preventDefault();
-        
-        loginUser(emailOrUsername, password)
+        loginUser(email, password)
         .then(() => {
-            navigate('/home');
+            navigate('/home'); 
+            printLocalStorage(); // debug statement - used to see if stored in local storage
         })
         .catch((err) => {
             console.log("error on login: ", err);
@@ -23,16 +24,16 @@ const Login = () => {
 
     return (
       <div className="login-container">
-        <h2>Login</h2>
+        <h2>Login to Tastebud</h2>
         {error && <p className="error">{error}</p>}
         <form onSubmit={handleLogin}>
           <div className="form-group">
-            <label htmlFor="emailOrUsername">Email or Username</label>
+            <label htmlFor="email">Email </label>
             <input
               type="text"
-              id="emailOrUsername"
-              value={emailOrUsername}
-              onChange={(e) => setEmailOrUsername(e.target.value)}
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
