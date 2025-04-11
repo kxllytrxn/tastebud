@@ -7,15 +7,14 @@ const Navbar = () => {
     const navigate = useNavigate();
     const [authenticated, setAuthenticated] = useState(false);
   
-    // Check authentication status on component mount
     useEffect(() => {
       setAuthenticated(isAuthenticated());
     }, []);
 
     const handleLogout = () => {
-        logoutUser(); // Handle logout logic
-        setAuthenticated(false); // Update local state
-        navigate('/login'); // Redirect to login page
+        logoutUser(); 
+        setAuthenticated(false); 
+        navigate('/login');
       };  
 
     return (
@@ -24,14 +23,12 @@ const Navbar = () => {
         <h1>TasteBud</h1>
         </div>
 
-        {/* Navbar links */}
         <ul className="navbar-links">
         <li><a href="/home">Home</a></li>
         <li><a href="/recipes">Recipes</a></li>
         <li><a href="/profile">Profile</a></li>
         </ul>
 
-        {/* Conditional rendering based on authentication */}
         <div className="navbar-actions">
         {!authenticated ? (
             <>
