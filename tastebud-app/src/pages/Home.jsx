@@ -1,6 +1,8 @@
 import React from 'react';
-import Post from '@/components/Post/Post';
+import Post from '@/components/Post/PostHome';
 import SideBarUser from '@/components/SideBarUser/SideBarUser.jsx';
+import IconButton from '@/components/Button/IconButton';
+
 import '@/main.css';
 
 // Placeholder Components - TODO: REMOVE LATER
@@ -19,10 +21,10 @@ const PostItem = () => (
       className="card-img"
       style={{ height: "192px", backgroundColor: "#e5e7eb", margin: "8px 0" }}
     />
-    <div className="card-footer">
-      <button>🔗</button>
-      <button>🤍</button>
-      <button>💬</button>
+    <div className="card-footer icon-buttons-container">
+      <IconButton icon="🔗" onClick={() => console.log('Share clicked')} />
+      <IconButton icon="🤍" onClick={() => console.log('Like clicked')} />
+      <IconButton icon="💬" onClick={() => console.log('Comment clicked')} />
     </div>
     <div className="card-text">James Doe commented...</div>
   </div>
@@ -71,7 +73,13 @@ const Home = () => {
         <CreatePost />
         <Post 
           image="https://www.thedietchefs.com/wp-content/uploads/2024/01/Salmon-and-rice-735x1103.jpg" 
-          comment={{ name: "James Doe", text: "Looks great!" }}
+          comments={[{ name: "James Doe", text: "Looks great!" }, { name: "Jane Doe", text: "Slay :)" }]}
+          instructions={[
+            "Cook the rice",
+            "Season the salmon",
+            "Pan-fry for 3 minutes each side",
+            "Serve with soy sauce",
+          ]}
         />
         <PostItem />
         <PostItem />

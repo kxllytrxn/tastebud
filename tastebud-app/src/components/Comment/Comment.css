@@ -1,0 +1,37 @@
+.comment {
+    background-color: #E8E7E5;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    margin-top: 0.75rem;
+}
+
+.avatar.small {
+    width: 36px;
+    height: 36px;
+    background: #ccc;
+    border-radius: 9999px;
+    flex-shrink: 0;
+}
+
+.comment-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.comment-author {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #2D2D2D;
+    font-family: 'Inter', sans-serif;
+}
+
+.comment-text {
+    font-size: 0.85rem;
+    color: #555;
+    font-family: 'Inter', sans-serif;
+    margin-top: 2px;
+}
