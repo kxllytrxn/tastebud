@@ -1,7 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { isAuthenticated, logoutUser } from '@/utils/auth'
+import NavbarIcon from './NavbarIcon'
+import NavbarSearch from './NavbarSearch'
+import NavbarButton from './NavbarButton'
 import './Navbar.css'
+import logo from './navbarAssets/logo.png'
+import homeIcon from './navbarAssets/home.png'
+import utencilIcon from './navbarAssets/utencils.png'
+import messageIcon from './navbarAssets/message.png'
+import notificationIcon from './navbarAssets/notification.png'
+import profileIcon from './navbarAssets/profile.png'
+
+// This file is a combination of all the NavBar sub components
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -17,27 +28,35 @@ const Navbar = () => {
         navigate('/login');
       };  
 
+    const handleSearch = (searchText) => {
+        console.log('Searching for:', searchText);
+        // NO ACTUAL SEARCH FUNCTIONALITY YET
+    };
+
     return (
-    <nav className="navbar">
-        <div className="navbar-logo">
-        <h1>TasteBud</h1>
+    <nav className="navbar-container">
+        <div className="navbar-left">
+            <div className="navbar-logo">
+                <img src={logo} alt="TasteBud Logo" />
+            </div>
+            <NavbarButton text="People" hasDropdown={true}>
+                <ul className="dropdown-menu">
+                    <li>People</li>
+                    <li>Recipes</li>
+                </ul>
+            </NavbarButton>
+            <NavbarSearch 
+                placeholder="Search..." 
+                onSearch={handleSearch} 
+            />
         </div>
-
-        <ul className="navbar-links">
-        <li><a href="/home">Home</a></li>
-        <li><a href="/recipes">Recipes</a></li>
-        <li><a href="/profile">Profile</a></li>
-        </ul>
-
-        <div className="navbar-actions">
-        {!authenticated ? (
-            <>
-            <button className="btn-login" onClick={() => navigate('/login')}>Login</button>
-            <button className="btn-signup" onClick={() => navigate('/signup')}>Sign Up</button>
-            </>
-        ) : (
-            <button className="btn-logout" onClick={handleLogout}>Logout</button>
-        )}
+        
+        <div className="navbar-right">
+            <NavbarIcon icon={homeIcon} link="/home" />
+            <NavbarIcon icon={utencilIcon} link="/recipes" />
+            <NavbarIcon icon={messageIcon} link="/messages" />
+            <NavbarIcon icon={notificationIcon} link="/notifications" />
+            <NavbarIcon icon={profileIcon} link="/profile" />
         </div>
     </nav>
     );
