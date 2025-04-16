@@ -1,36 +1,78 @@
-import { setUser, logout, isAuthenticated as checkAuthentication } from '@/services/localStorage';
+import { setUser, logout, isAuthenticated as checkAuthentication, saveUserToDB, getAllUsers } from '@/services/localStorage';
+import { v4 as uuidv4 } from 'uuid';
 
 // TEMPORARILY USE THE FAKE USER TO BYPASS LOGIN - 
 // ONCE MAIN COMPONENTS ARE DONE, THE IMPLEMENTATION CAN BE ACTUALLY DONE
 const fakeUser = {
     id: 1,
-    username: 'johndoe',
-    email: 'john.doe@example.com',
+    email: 'johndoe',
+    first_name: 'john',
+    last_name: 'doe',
     password: 'password', 
     };
 
-export const loginUser = async (emailOrUsername, password) => {
-    if (emailOrUsername === fakeUser.username || emailOrUsername === fakeUser.email) {
-        if (password === fakeUser.password) {
-        setUser(fakeUser);
-        return { success: true, user: fakeUser };
-        } else {
-        return { success: false, message: 'Incorrect password' };
-        }
+export const findUserByEmail = (email) => {
+    const users = getAllUsers();
+    return users.find((user) => user.email === email);
+    };
+    
+// Login by email + password
+export const loginUser = async (email, password) => {
+    const user = findUserByEmail(email);
+    if (!user) {
+        return { success: false, message: 'User not found' };
     }
-    return { success: false, message: 'User not found' };
+    if (user.password !== password) {
+        return { success: false, message: 'Wrong password; try again!' };
+    }
+    setUser(user);
+    return { success: true, user };
 };
     
-export const signup = async (email, username, password) => {
-    const fakeUser = { id: 2, username, email, password };    
-    setUser(fakeUser);
-    return { success: true, user: fakeUser };
-};
+    // SIGNUP
+export const signup = async (email, first_name, last_name, password) => {
+    if (findUserByEmail(email)) {
+        return { success: false, message: 'Email already registered' };
+    }
     
+    const newUser = {
+        id: uuidv4(),
+        email,
+        password,
+        first_name,
+        last_name,
+        created_at: new Date().toISOString(),
+        saved_posts: [],
+        profile_photo_url: '', // default for now
+        display_name: `${first_name} ${last_name}`,
+        email_verified: false
+    };
+    
+    saveUserToDB(newUser);
+    setUser(newUser);
+    
+    return { success: true, user: newUser };
+    };
+    
+// LOGOUT
 export const logoutUser = () => {
-    logout(); 
+    logout();
 };
-    
+
+// AUTH CHECK
 export const isAuthenticated = () => {
-    return checkAuthentication(); 
+    return checkAuthentication();
 };
+
+export const printLocalStorage = () => {
+    console.log('📦 TasteBud LocalStorage Debug');
+    Object.keys(localStorage).forEach((key) => {
+        try {
+        const value = JSON.parse(localStorage.getItem(key));
+        console.log(`Key ${key}:`, value);
+        } catch {
+        console.log(`key ${key}: (non-JSON)`, localStorage.getItem(key));
+        }
+    });
+    console.log('— end of localStorage —');
+    };

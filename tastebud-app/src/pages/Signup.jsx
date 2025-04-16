@@ -5,15 +5,16 @@ import './Login.css';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
-  const [username, setUsername] = useState('');
+  const [first_name, setFirstName] = useState('');
+  const [last_name, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email && username && password) {
-      signup(email, username, password);
+    if (email && first_name && last_name && password) {
+      signup(email, first_name, last_name, password);
       navigate('/home');
     } else {
       setError('Please fill in all fields');
@@ -36,12 +37,21 @@ const Signup = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">First Name</label>
           <input
             type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            id="first_name"
+            value={first_name}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+        </div><div className="form-group">
+          <label htmlFor="username">First Name</label>
+          <input
+            type="text"
+            id="last_name"
+            value={last_name}
+            onChange={(e) => setLastName(e.target.value)}
             required
           />
         </div>
