@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import "./PostHome.css";
+import "./PostProfile.css";
 import IconButton from '@/components/Button/IconButton';
 import RecipeInstruction from "@/components/RecipeInstruction/RecipeInstruction";
 import Comment from "@/components/Comment/Comment";
@@ -9,14 +9,14 @@ import Comment from "@/components/Comment/Comment";
 
 // here postId is a single argument, but we can add more!
 const Post = ({
-  user = { name: "John Doe", avatar: "" },
+    user = { name: "John Doe", avatar: "https://images.squarespace-cdn.com/content/v1/598a797af5e23155afc4d592/1597998089824-UHZER996H8NB5EYYDFIW/AVI.JPG?format=2500w" },
   title = "Salmon and Rice",
   timestamp = "March 8, 2025",
   image = null,
   description = "So delicious!",
   instructions = [],
   comments = null,
-  initialLikes = 0
+  initialLikes = 0,
 }) => {
   const [showMenu, setShowMenu] = useState(false);
 
@@ -42,12 +42,13 @@ const Post = ({
     setNewComment("");
   };
 
-
   return (
     <div className="card">
       {/* Header */}
       <div className="post-header">
-        <div className="avatar" />
+        <div className="avatar">
+          <img src={user.avatar} alt={`${user.name}'s avatar`} />
+        </div>
         <div className="post-header-info">
           <div className="username">{user.name}</div>
           <div className="timestamp">{timestamp}</div>
@@ -68,55 +69,58 @@ const Post = ({
         </div>
       </div>
 
-      {/* Title */}
-      <h2 className="post-card-title">{title}</h2>
+        {/* Title */}
+        <h2 className="post-card-title">{title}</h2>
 
-      {/* Description */}
-      {description && <p className="post-description">{description}</p>}
+        {/* Description */}
+        {description && <p className="post-description">{description}</p>}
 
-      {/* Image */}
-      {image && (
-        <img
-          src={image}
-          alt="Post"
-          className="post-card-img"
-        />
-      )}
+        {/* Image and Recipes */}
+          <div className="img-recipe">
+              {image && (
+                  <img
+                      src={image}
+                      alt="Post"
+                      className="post-card-img"
+                  />
+              )}
 
-      {/* Recipe Preview */}
-      <RecipeInstruction instructions={instructions} />
+              <div className="recipe-column">
+                  <RecipeInstruction instructions={instructions} />
+              </div>
+          </div>
 
-      {/* Actions */}
-      <div className="card-footer icon-buttons-container">
-        <IconButton icon={liked ? "❤️" : "🤍"} onClick={toggleLike} />
-        <IconButton icon="💬" onClick={() => console.log('Comment clicked')} />
-        <IconButton icon="🔗" onClick={() => console.log('Share clicked')} />
-      </div>
+        {/* Actions */}
+        {/* <div className="card-footer icon-buttons-container">
+            <IconButton icon={liked ? "❤️" : "🤍"} onClick={toggleLike} />
+            <IconButton icon="💬" onClick={handleAddComment} />
+            <IconButton icon="🔗" onClick={() => console.log('Share clicked')} />
+        </div> */}
 
-      {/* Like and Comment Count */}
-      <div className="post-stats">
-        <span>❤️ {likes} likes</span>
-        <span>💬 {allComments.length} comments</span>
-      </div>
+        {/* Like and Comment Count */}
+        <div className="post-stats">
+            <span>❤️ {likes} likes</span>
+            <span>💬 {allComments.length} comments</span>
+        </div>
 
-      {/* Comment */}
-      {allComments.map((c, i) => (
-        <Comment key={i} name={c.name} text={c.text} />
-      ))}
+        {/* Comment */}
+        {/* {allComments.map((c, i) => (
+            <Comment key={i} name={c.name} text={c.text} />
+        ))} */}
 
-      {/* Add Comment */}
-      <input
-        type="text"
-        placeholder="Add a comment..."
-        className="comment-input"
-        value={newComment}
-        onChange={(e) => setNewComment(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") handleAddComment();
-        }}
-      />
-    </div>
-  );
-};
+        {/* Add Comment */}
+        {/* <input
+            type="text"
+            placeholder="Add a comment..."
+            className="comment-input"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            onKeyDown={(e) => {
+            if (e.key === "Enter") handleAddComment();
+            }}
+        /> */}
+        </div>
+    );
+    };
 
 export default Post;

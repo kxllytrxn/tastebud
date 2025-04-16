@@ -1,5 +1,5 @@
 import React from 'react';
-import Post from '@/components/Post/PostHome';
+import PostHome from '@/components/Post/PostHome';
 import SideBarUser from '@/components/SideBarUser/SideBarUser.jsx';
 import IconButton from '@/components/Button/IconButton';
 
@@ -71,9 +71,9 @@ const Home = () => {
         />      
       <main>
         <CreatePost />
-        <Post 
-          image="https://www.thedietchefs.com/wp-content/uploads/2024/01/Salmon-and-rice-735x1103.jpg" 
-          comments={[{ name: "James Doe", text: "Looks great!" }, { name: "Jane Doe", text: "Slay :)" }]}
+        <PostHome
+          image="https://assets.epicurious.com/photos/5f32b611f1722a2c13407e4e/1:1/w_2560%2Cc_limit/miso-glazed-salmon-recipe-BA-081120.jpg" 
+          comments={[{ name: "James Doe", text: "Looks great!", avatar: "https://i.pinimg.com/474x/f7/f4/86/f7f486d7d277227fd7c7fce2541807cc.jpg" }, { name: "Jane Doe", text: "Slay :)", avatar:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTo6kW9VIrbqGQB5tgpzN_YulvweOfOTxmDOw&s" }]}
           instructions={[
             "Cook the rice",
             "Season the salmon",

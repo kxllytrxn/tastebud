@@ -11,7 +11,7 @@ const UserProfile = () => {
       <div className="container">
             <main>
               <PostProfile 
-                image="https://www.thedietchefs.com/wp-content/uploads/2024/01/Salmon-and-rice-735x1103.jpg" 
+                image="https://assets.epicurious.com/photos/5f32b611f1722a2c13407e4e/1:1/w_2560%2Cc_limit/miso-glazed-salmon-recipe-BA-081120.jpg" 
                 comments={[{ name: "James Doe", text: "Looks great!" }, { name: "Jane Doe", text: "Slay :)" }]}
                 instructions={[
                   "Cook the rice",
@@ -19,6 +19,7 @@ const UserProfile = () => {
                   "Pan-fry for 3 minutes each side",
                   "Serve with soy sauce",
                 ]}
+                currPage="userPage"
               />
             </main>
           </div>

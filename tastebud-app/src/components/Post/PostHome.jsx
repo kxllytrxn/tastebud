@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import "./PostHome.css";
 import IconButton from '@/components/Button/IconButton';
 import RecipeInstruction from "@/components/RecipeInstruction/RecipeInstruction";
@@ -9,7 +9,7 @@ import Comment from "@/components/Comment/Comment";
 
 // here postId is a single argument, but we can add more!
 const Post = ({
-  user = { name: "John Doe", avatar: "" },
+  user = { name: "John Doe", avatar: "https://images.squarespace-cdn.com/content/v1/598a797af5e23155afc4d592/1597998089824-UHZER996H8NB5EYYDFIW/AVI.JPG?format=2500w" },
   title = "Salmon and Rice",
   timestamp = "March 8, 2025",
   image = null,
@@ -34,10 +34,11 @@ const Post = ({
 
   const [newComment, setNewComment] = useState("");
   const [allComments, setAllComments] = useState(comments || []);
+  const commentInputRef = useRef(null);
 
   const handleAddComment = () => {
     if (newComment.trim() === "") return;
-    const newEntry = { name: user.name, text: newComment };
+    const newEntry = { name: user.name, text: newComment, avatar: user.avatar };
     setAllComments([...allComments, newEntry]);
     setNewComment("");
   };
@@ -47,7 +48,9 @@ const Post = ({
     <div className="card">
       {/* Header */}
       <div className="post-header">
-        <div className="avatar" />
+        <div className="avatar">
+          <img src={user.avatar} alt={`${user.name}'s avatar`} />
+        </div>
         <div className="post-header-info">
           <div className="username">{user.name}</div>
           <div className="timestamp">{timestamp}</div>
@@ -89,7 +92,10 @@ const Post = ({
       {/* Actions */}
       <div className="card-footer icon-buttons-container">
         <IconButton icon={liked ? "❤️" : "🤍"} onClick={toggleLike} />
-        <IconButton icon="💬" onClick={() => console.log('Comment clicked')} />
+        <IconButton
+          icon="💬"
+          onClick={() => commentInputRef.current?.focus()}
+        />
         <IconButton icon="🔗" onClick={() => console.log('Share clicked')} />
       </div>
 
@@ -101,7 +107,7 @@ const Post = ({
 
       {/* Comment */}
       {allComments.map((c, i) => (
-        <Comment key={i} name={c.name} text={c.text} />
+        <Comment key={i} name={c.name} text={c.text} avatar={c.avatar} />
       ))}
 
       {/* Add Comment */}
@@ -109,6 +115,7 @@ const Post = ({
         type="text"
         placeholder="Add a comment..."
         className="comment-input"
+        ref={commentInputRef}
         value={newComment}
         onChange={(e) => setNewComment(e.target.value)}
         onKeyDown={(e) => {
