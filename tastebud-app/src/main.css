@@ -4,12 +4,14 @@
     --orange: #F26733;
     --orange-opacity: rgba(242, 103, 51, 0.7);
     --green: #397637;
+    --green-opacity: rgba(57, 118, 55, 0.7);
     --yellow: #FEA914;
+    --yellow-opacity: rgba(254, 168, 20, 0.7);
     --black: #2D2D2D;
     --warm-grey: #E8E7E5;
+    --dark-grey: #666666;
     --white: #FFFFFF;
 }
-
   
 /* ========== fonts/typography ========== */
 body {
@@ -19,8 +21,9 @@ body {
     background-color: var(--warm-grey);
     margin: 0;
     padding: 0;
+    max-width: 100%;
+    overflow-x: hidden;
   }
-
 
 /* Headings */
 h1 {
@@ -50,12 +53,12 @@ p {
     line-height: 1.6;
 }
 
-  .container {
+.container {
     display: flex;
     justify-content: space-between;
     padding: 24px;
     gap: 24px;
-  }
+}
   
   main {
     flex: 1;
@@ -132,7 +135,6 @@ p {
 }
 .recipe-container {
     display: flex;
-    width: 100vw;
     /* max-width: 90vw; */
     column-gap: 1%;  
     row-gap: 2%;

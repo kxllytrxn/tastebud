@@ -2,7 +2,7 @@ import React from 'react';
 import RecipeCard from '@/components/RecipeCard/RecipeCard.jsx';
 import SideBarUser from '@/components/SideBarUser/SideBarUser.jsx';
 import '@/main.css';
-
+import { Link } from 'react-router-dom';
 
 const Recipes = () => {
     const fakeRecipes = [
@@ -85,16 +85,20 @@ const Recipes = () => {
                     lastMealDate="April 10, 2025"
                 />
             <div className="recipe-container">
+
                 {fakeRecipes.map((recipe) => (
+                <Link to={`/recipe/${recipe.id}`} key={recipe.id}>
                     <RecipeCard 
-                    key={recipe.id}
-                    title={recipe.title}
-                    description={recipe.description}
-                    imageUrl={recipe.image}
-                    instructions={recipe.instructions}
-                    />
+                        key={recipe.id}
+                        title={recipe.title}
+                        description={recipe.description}
+                        imageUrl={recipe.image}
+                        instructions={recipe.instructions}
+                    />                
+                </Link>
                 ))}
-            </div>
+                
+             </div>
         </div>
         
      

@@ -1,3 +1,4 @@
+
 export const isAuthenticated = () => {
     // checks to see if user data exists in localStorage to be authenticated
     const user = localStorage.getItem('user');    

@@ -1,5 +1,7 @@
 import React from 'react';
 import './SideBarUser.css';
+import "@/main.css"
+
 
 const SideBarUser = ({ name, followers, following, lastMealDate }) => {
     return (
@@ -22,4 +24,4 @@ const SideBarUser = ({ name, followers, following, lastMealDate }) => {
     );
   };
   
-  export default SideBarUser;
+export default SideBarUser;
