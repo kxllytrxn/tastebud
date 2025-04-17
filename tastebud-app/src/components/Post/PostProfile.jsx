@@ -12,8 +12,9 @@ const Post = ({
     user = { name: "John Doe", avatar: "https://images.squarespace-cdn.com/content/v1/598a797af5e23155afc4d592/1597998089824-UHZER996H8NB5EYYDFIW/AVI.JPG?format=2500w" },
   title = "Salmon and Rice",
   timestamp = "March 8, 2025",
+  caption = "Made dinner with @Jane Doe",
   image = null,
-  description = "So delicious!",
+  description = "Miso glazed Salmon with rice",
   instructions = [],
   comments = null,
   initialLikes = 0,
@@ -72,8 +73,8 @@ const Post = ({
         {/* Title */}
         <h2 className="post-card-title">{title}</h2>
 
-        {/* Description */}
-        {description && <p className="post-description">{description}</p>}
+        {/* Caption */}
+        {caption && <p className="post-caption">{caption}</p>}
 
         {/* Image and Recipes */}
           <div className="img-recipe">
