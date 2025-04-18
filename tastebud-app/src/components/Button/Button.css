@@ -1,3 +1,24 @@
+/* Button.css */
+/* still need to add different colors */
+.custom-button {
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 9999px;
+    /* fully rounded */
+    font-weight: 600;
+    font-size: 0.875rem;
+    /* text-sm */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.custom-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .icon-button {
     width: 40px;
     height: 40px;
@@ -46,4 +67,4 @@
     display: flex;
     gap: 8px;
     align-items: center;
-}
+
