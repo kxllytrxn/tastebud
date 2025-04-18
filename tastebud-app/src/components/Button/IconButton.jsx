@@ -2,10 +2,9 @@ import React from "react";
 import "./Button.css";
 
 const IconButton = ({ icon, onClick, className = "" }) => {
-    const isImageIcon = typeof icon === 'string' && (icon.startsWith('http') || icon.startsWith('/'));
-
+    const isImageIcon = typeof icon === 'string' && (icon.startsWith('http') || icon.startsWith('/'));    
     return (
-        <button
+        <button 
             className={`icon-button ${className}`}
             onClick={onClick}
             aria-label={typeof icon === 'string' ? icon : 'button'}

@@ -2,7 +2,6 @@ import React from 'react';
 import PostHome from '@/components/Post/PostHome';
 import SideBarUser from '@/components/SideBarUser/SideBarUser.jsx';
 import IconButton from '@/components/Button/IconButton';
-
 import '@/main.css';
 
 // Placeholder Components - TODO: REMOVE LATER

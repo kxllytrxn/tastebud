@@ -1,22 +1,87 @@
 .recipe-card {
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    max-width: 300px;
+    font-family: 'Inter', sans-serif;
     display: flex;
     flex-direction: column;
-    background-color: var(--warm-grey);
+    margin: 20px;
+}
+  
+.recipe-image-wrapper {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+  
+.recipe-image {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+}
+.recipe-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px 12px 0px 0px;
+    margin-bottom: 12px;
+} 
+
+  
+.recipe-content {
+   display: flex; 
+    flex-direction: column;
+    justify-content: flex-start;
     padding: 16px;
-    max-width: 220px;
-    border-radius: 12px;
-    margin-right: 8px;
-    margin-bottom: 16px;
+  
 }
-
-.recipe-title {
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 1;
-}
-
-.recipe-description {
+  
+  .recipe-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2D2D2D;
+    margin-top: 0px;
+    margin-bottom: 4px;
+  }
+  
+  .recipe-description {
+    font-size: 15px;
+    color: #2D2D2D;
+    opacity: 0.85;
+    margin-bottom: 12px;
+  }
+  
+  .recipe-instructions h4 {
     font-size: 16px;
-    font-weight: 400;
-    line-height: 1.2;
-}
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2D2D2D;
+  }
+  
+  .instruction-list {
+    list-style: decimal;
+    margin-left: 20px;
+    padding-left: 0;
+    color: #2D2D2D;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+  
+  .see-more-btn {
+    background-color: #F26733;
+    color: #fff;
+    font-weight: 600;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .see-more-btn:hover {
+    background-color: #FEA914;
+  }
