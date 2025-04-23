@@ -2,6 +2,8 @@ import React from 'react';
 import Post from '@/components/Post/Post';
 import SideBarUser from '@/components/SideBarUser/SideBarUser.jsx';
 import IconButton from '@/components/Button/IconButton';
+import ManageInfo from '@/components/ManageInfo/ManageInfo';
+import PeopleYouMayKnow from '@/components/PeopleYouMayKnow/PeopleYouMayKnow';
 import '@/main.css';
 
 // Placeholder Components - TODO: REMOVE LATER
@@ -31,31 +33,8 @@ const PostItem = () => (
 
 const RightSidebar = () => (
   <div className="sidebar">
-    <div className="card">
-      <h3 className="sidebar-header">Manage my info</h3>
-      <ul className="sidebar-list">
-        <li>👤 My circle</li>
-        <li>📌 Saved recipes</li>
-        <li>📋 My recipes</li>
-      </ul>
-    </div>
-    <div className="card">
-      <h3 className="sidebar-header">People you may know:</h3>
-      <ul className="sidebar-list">
-        {[
-          "Etai Doe",
-          "Emily Doe",
-          "Lauren Doe",
-          "Kelly Doe",
-          "James Doe",
-          "Bjoern Doe",
-          "Eevee Doe",
-          "Oski Doe",
-        ].map((name) => (
-          <li key={name}>👤 {name}</li>
-        ))}
-      </ul>
-    </div>
+    <ManageInfo />
+    <PeopleYouMayKnow />
   </div>
 );
 
