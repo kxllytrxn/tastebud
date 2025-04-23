@@ -83,7 +83,7 @@ background-color: #0056b3;
   background-color: #f3f4f6;
   border-bottom: 1px solid #e5e7eb;
   height: 64px;
-  width: 100%;
+  max-width: 100%;
 }
 
 .navbar-left {

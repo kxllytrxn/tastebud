@@ -1,9 +1,12 @@
 import React from 'react';
 import './SideBarUser.css';
+import "@/main.css"
+
 
 const SideBarUser = ({ name, followers, following, lastMealDate }) => {
     return (
       <div className="sidebar-user">
+        <div className="header-bar"></div>
         <div className="profile-image" />
   
         <h3 className="user-name">{name}</h3>
@@ -22,4 +25,4 @@ const SideBarUser = ({ name, followers, following, lastMealDate }) => {
     );
   };
   
-  export default SideBarUser;
+export default SideBarUser;
