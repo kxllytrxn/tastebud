@@ -1,3 +1,5 @@
+import defaultRecipes from "../data/fakeRecipe";
+
 export const isAuthenticated = () => {
     // checks to see if user data exists in localStorage to be authenticated
     const user = localStorage.getItem('user');    
@@ -24,3 +26,37 @@ export const saveUserToDB = (user) => {
   users.push(user);
   localStorage.setItem(USERS_KEY, JSON.stringify(users));
 };
+
+
+const POSTS_KEY = 'tastebud-posts'; // could also call this 'tastebud-recipes'
+export const getAllPosts = () => {
+  const posts = JSON.parse(localStorage.getItem("posts")) || [];
+
+  if (posts.length === 0) {
+    return defaultRecipes;
+  }
+
+  return posts;
+};
+    
+export const savePost = (post) => {
+    const posts = getAllPosts();
+    posts.push(post);
+    localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+};
+    
+export const getPostById = (id) => {
+    const posts = getAllPosts();
+    return posts.find(post => post.id === id);
+};
+    
+export const setAllPosts = (posts) => {
+    localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+};
+    
+export const deletePostById = (id) => {
+    const posts = getAllPosts();
+    const filtered = posts.filter(post => post.id !== id);
+    localStorage.setItem(POSTS_KEY, JSON.stringify(filtered));
+};
+    

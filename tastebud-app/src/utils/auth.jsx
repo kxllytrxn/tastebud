@@ -37,10 +37,10 @@ export const signup = async (email, first_name, last_name, password) => {
     
     const newUser = {
         id: uuidv4(),
-        email,
-        password,
-        first_name,
-        last_name,
+        email: email,
+        password: password,
+        first_name: first_name,
+        last_name: last_name,
         created_at: new Date().toISOString(),
         saved_posts: [],
         profile_photo_url: '', // default for now
@@ -75,4 +75,4 @@ export const printLocalStorage = () => {
         }
     });
     console.log('— end of localStorage —');
-    };
+};
