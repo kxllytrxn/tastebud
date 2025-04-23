@@ -9,13 +9,11 @@ const RecipeCard = ({ title, description, imageUrl, instructions }) => {
             <div className="recipe-image">
                 {imageUrl ? (
                     <img className="" src={imageUrl} alt={title} />
-                ) : ( <></>
+                ) : ( <div className="img-yellow"> </div>
                 )}        </div>
             <div className="recipe-content">
                 <h3 className="recipe-title">{title}</h3>
                 <p className="recipe-description">{description}</p>
-
-                
             </div>
         </div>
     );

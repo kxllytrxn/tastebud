@@ -6,6 +6,7 @@ import "@/main.css"
 const SideBarUser = ({ name, followers, following, lastMealDate }) => {
     return (
       <div className="sidebar-user">
+        <div className="header-bar"></div>
         <div className="profile-image" />
   
         <h3 className="user-name">{name}</h3>

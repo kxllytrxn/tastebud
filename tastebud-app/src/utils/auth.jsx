@@ -75,4 +75,4 @@ export const printLocalStorage = () => {
         }
     });
     console.log('— end of localStorage —');
-    };
+};

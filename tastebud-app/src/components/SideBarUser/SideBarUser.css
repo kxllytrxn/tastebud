@@ -1,55 +1,70 @@
 .sidebar-user {
-    background-color: var(--white);
-    border-radius: 12px;
-    padding: 20px;
-    width: 250px;
-    max-width: 300px;
-    max-height: 600px;
-    text-align: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  }
-  
-  .profile-image {
-    width: 100px;
-    height: 100px;
-    background-color: var(--warm-grey);
-    border-radius: 50%;
-    margin: 0 auto 16px;
-  }
-  
-  .user-name {
-    font-size: 24px;
-    font-weight: 500;
-    margin: 0;
-    color: #2D2D2D;
-  }
-  
-  .user-follow {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 12px;
-  }
-  
-  .last-meal {
-    font-size: 14px;
-    font-weight: 500;
-    color: #2D2D2D;
-    margin-bottom: 12px;
-  }
-  
-  .last-meal span {
-    font-weight: 400;
-  }
-  
-  .meal-preview {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-  }
-  
-  .meal-box {
-    width: 50px;
-    height: 50px;
-    background-color: #E8E7E5;
-    border-radius: 8px;
-  }
+  background-color: var(--white);
+  border-radius: 12px;
+  width: 300px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  overflow: hidden;
+  padding: 16px 16px 24px;
+  position: relative;
+  max-height: 500px;
+}
+
+.header-bar {
+  background-color: var(--green);
+  height: 16px;
+  width: 100%;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  background-color: #E8E7E5;
+  border-radius: 50%;
+  margin: 24px auto 12px;
+  border: 1px solid #2D2D2D;
+}
+
+.user-name {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0;
+  color: #2D2D2D;
+}
+
+.user-follow {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: var(--green);
+
+}
+
+.last-meal {
+  font-size: 14px;
+  font-weight: 500;
+  color: #2D2D2D;
+  margin-bottom: 12px;
+}
+
+.last-meal span {
+  font-weight: 400;
+}
+
+.meal-preview {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.meal-box {
+  width: 50px;
+  height: 50px;
+  background-color: #E8E7E5;
+  border-radius: 8px;
+}

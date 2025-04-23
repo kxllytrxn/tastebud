@@ -134,10 +134,10 @@ p {
     margin: 5% 2%;
 }
 .recipe-container {
-    display: flex;
-    /* max-width: 90vw; */
-    column-gap: 1%;  
-    row-gap: 2%;
-    flex-wrap: wrap;
-    align-content: flex-start;
+  width: 90%;
+  display: flex;
+  row-gap: 2%;
+  flex-wrap: wrap;
+  align-content: flex-start;
 }
+

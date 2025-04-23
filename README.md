@@ -41,7 +41,7 @@ This holds all of our code (where we'll be working!)
 - **`/utils`**: Contains helper functions and utilities that aid in various tasks throughout the app. 
     * **`postUtils.js`**: Contains logic for interactions and saving post-related data locally (like saving drafts or user posts to `localStorage`). 
 - **`/services`**: Helper files to interact with external services or APIs. 
-    * **`localStorageService.js`**: Contains functions for interacting with the browser's localStorage, e.g., saving user data or preferences.
+    * **`localStorage.js`**: Contains functions for interacting with the browser's localStorage, e.g., saving user data or preferences.
 
 
 
