@@ -12,9 +12,9 @@ const Post = ({
   user = { name: "John Doe", avatar: "https://images.squarespace-cdn.com/content/v1/598a797af5e23155afc4d592/1597998089824-UHZER996H8NB5EYYDFIW/AVI.JPG?format=2500w" },
   title = "Salmon and Rice",
   timestamp = "March 8, 2025",
-  caption = "Made dinner with @Jane Doe",
+  caption = "",
   image = null,
-  description = "Miso glazed Salmon with rice",
+  description = "",
   instructions = [],
   comments = null,
   initialLikes = 0,
@@ -48,6 +48,7 @@ const Post = ({
   return (
     <div className="card">
       {/* Header */}
+      <div className="post-header-bar"></div>
       <div className="post-header">
         <div className="avatar">
           <img src={user.avatar} alt={`${user.name}'s avatar`} />
@@ -57,7 +58,7 @@ const Post = ({
           <div className="timestamp">{timestamp}</div>
         </div>
 
-        {/* ⋯ Options Menu */}
+        {/* Options Menu */}
         <div className="post-menu-container">
           <button className="menu-button" onClick={() => setShowMenu(!showMenu)}>
             ⋯

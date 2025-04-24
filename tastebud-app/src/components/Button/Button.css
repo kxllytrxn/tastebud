@@ -1,70 +1,78 @@
-/* Button.css */
-/* still need to add different colors */
 .custom-button {
-    color: white;
-    padding: 0.5rem 1.5rem;
-    border-radius: 9999px;
-    /* fully rounded */
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
     font-weight: 600;
-    font-size: 0.875rem;
-    /* text-sm */
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    border: none;
+    padding: 10px 24px;
+    border-radius: 999px;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease-in-out;
 }
 
-.custom-button:disabled {
-    opacity: 0.5;
+.orange.primary {
+    background-color: var(--orange);
+    color: white;
+    border: none;
+}
+
+.orange.primary:hover {
+    opacity: 0.7;
+}
+
+.orange.secondary {
+    background-color: transparent;
+    color: var(--orange);
+    border: 2px solid var(--orange);
+}
+
+.orange.secondary:hover {
+    background-color: var(--orange-opacity);
+    color: white;
+}
+
+.green.primary {
+    background-color: var(--green);
+    color: white;
+    border: none;
+}
+
+.green.primary:hover {
+    opacity: 0.7;
+}
+
+.green.secondary {
+    background-color: transparent;
+    color: var(--green);
+    border: 2px solid var(--green);
+}
+
+.green.secondary:hover {
+    background-color: var(--green-opacity);
+    color: white;
+}
+
+.yellow.primary {
+    background-color: var(--yellow);
+    color: white;
+    border: none;
+}
+
+.yellow.primary:hover {
+    opacity: 0.7;
+}
+
+.yellow.secondary {
+    background-color: transparent;
+    color: var(--yellow);
+    border: 2px solid var(--yellow);
+}
+
+.yellow.secondary:hover {
+    background-color: var(--yellow-opacity);
+    color: white;
+}
+
+/* Disabled style (optional) */
+.disabled {
+    opacity: 0.4;
     cursor: not-allowed;
 }
-
-.icon-button {
-    width: 40px;
-    height: 40px;
-    background-color: #f3f4f6;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-    padding: 0;
-    margin: 0 4px;
-}
-
-.icon-button:hover {
-    background-color: #e5e7eb;
-    transform: scale(1.05);
-}
-
-.icon-button:active {
-    transform: scale(0.95);
-}
-
-.icon-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-}
-
-.icon-button .icon-image {
-    width: 25px;
-    height: 25px;
-    object-fit: contain;
-}
-
-.icon-button .icon-text {
-    font-size: 25px;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Container for multiple icon buttons */
-.icon-buttons-container {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-
