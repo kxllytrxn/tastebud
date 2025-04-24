@@ -1,18 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PostHome from '@/components/Post/PostHome';
 import SideBarUser from '@/components/SideBarUser/SideBarUser.jsx';
 import IconButton from '@/components/Button/IconButton';
 import ManageInfo from '@/components/ManageInfo/ManageInfo';
 import PeopleYouMayKnow from '@/components/PeopleYouMayKnow/PeopleYouMayKnow';
 import '@/main.css';
+import { CreatePost } from '@/components/Modal/CreatePost';
 
 // Placeholder Components - TODO: REMOVE LATER
-
-const CreatePost = () => (
-  <div className="card">
-    <button className="btn-create-post">Create a post →</button>
-  </div>
-);
 
 const PostItem = () => (
   <div className="card">
@@ -39,6 +34,8 @@ const RightSidebar = () => (
 );
 
 const Home = () => {
+  const [createPostModalVisible, setCreatePostModalVisible] = useState(false);
+  
   return (
     <div className="container">
         <SideBarUser 
@@ -48,7 +45,14 @@ const Home = () => {
             lastMealDate="April 10, 2025"
         />      
       <main>
-        <CreatePost />
+        <div className="card">
+          <button 
+            className="btn-create-post" 
+            onClick={() => setCreatePostModalVisible(true)}
+          >
+            Create a post →
+          </button>
+        </div>
         <PostHome
           image="https://assets.epicurious.com/photos/5f32b611f1722a2c13407e4e/1:1/w_2560%2Cc_limit/miso-glazed-salmon-recipe-BA-081120.jpg" 
           comments={[{ name: "James Doe", text: "Looks great!", avatar: "https://i.pinimg.com/474x/f7/f4/86/f7f486d7d277227fd7c7fce2541807cc.jpg" }, { name: "Jane Doe", text: "Slay :)", avatar:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTo6kW9VIrbqGQB5tgpzN_YulvweOfOTxmDOw&s" }]}
@@ -63,6 +67,11 @@ const Home = () => {
         <PostItem />
       </main>
       <RightSidebar />
+      
+      <CreatePost 
+        visible={createPostModalVisible}
+        onClose={() => setCreatePostModalVisible(false)}
+      />
     </div>
   );
 };
