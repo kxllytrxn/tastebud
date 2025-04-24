@@ -3,6 +3,7 @@ import "./PostHome.css";
 import IconButton from '@/components/Button/IconButton';
 import RecipeInstruction from "@/components/RecipeInstruction/RecipeInstruction";
 import Comment from "@/components/Comment/Comment";
+import { DeleteModal } from '@/components/Modal/DeleteModal';
 
 // example of an import for utils to getPosts
 // import { getPosts, deletePost, editPost } from '@/utils/PostUtils'; 
@@ -20,6 +21,7 @@ const Post = ({
   initialLikes = 0,
 }) => {
   const [showMenu, setShowMenu] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(initialLikes);
@@ -44,6 +46,17 @@ const Post = ({
     setNewComment("");
   };
 
+  const handleDeleteClick = () => {
+    setShowMenu(false);
+    setShowDeleteModal(true);
+  };
+// TODO: add delete function
+  const handleConfirmDelete = () => {
+    console.log('Post deleted');
+    // Call delete functon here
+    // deletePost(postId or whatever you need to pass in);
+    setShowDeleteModal(false);
+  };
 
   return (
     <div className="card">
@@ -65,7 +78,7 @@ const Post = ({
           {showMenu && (
             <div className="menu-dropdown">
               <button>Edit</button>
-              <button>Delete</button>
+              <button onClick={handleDeleteClick}>Delete</button>
               <button>Share</button>
             </div>
           )}
@@ -124,6 +137,12 @@ const Post = ({
         }}
       />
 
+      {/* Delete Modal */}
+      <DeleteModal 
+        visible={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        onConfirm={handleConfirmDelete}
+      />
     </div>
   );
 };
