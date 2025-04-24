@@ -4,6 +4,7 @@ import IconButton from '@/components/Button/IconButton';
 import RecipeInstruction from "@/components/RecipeInstruction/RecipeInstruction";
 import Comment from "@/components/Comment/Comment";
 import { DeleteModal } from '@/components/Modal/DeleteModal';
+import { ShareModal } from '@/components/Modal/ShareModal';
 
 // example of an import for utils to getPosts
 // import { getPosts, deletePost, editPost } from '@/utils/PostUtils'; 
@@ -22,6 +23,7 @@ const Post = ({
 }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
 
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(initialLikes);
@@ -50,11 +52,16 @@ const Post = ({
     setShowMenu(false);
     setShowDeleteModal(true);
   };
-// TODO: add delete function
+
+  const handleShareClick = () => {
+    setShowMenu(false);
+    setShowShareModal(true);
+  };
+
   const handleConfirmDelete = () => {
     console.log('Post deleted');
-    // Call delete functon here
-    // deletePost(postId or whatever you need to pass in);
+    // Here you would call your delete function, e.g.:
+    // deletePost(postId);
     setShowDeleteModal(false);
   };
 
@@ -79,7 +86,7 @@ const Post = ({
             <div className="menu-dropdown">
               <button>Edit</button>
               <button onClick={handleDeleteClick}>Delete</button>
-              <button>Share</button>
+              <button onClick={handleShareClick}>Share</button>
             </div>
           )}
         </div>
@@ -110,7 +117,7 @@ const Post = ({
           icon="💬"
           onClick={() => commentInputRef.current?.focus()}
         />
-        <IconButton icon="🔗" onClick={() => console.log('Share clicked')} />
+        <IconButton icon="🔗" onClick={handleShareClick} />
       </div>
 
       {/* Like and Comment Count */}
@@ -142,6 +149,12 @@ const Post = ({
         visible={showDeleteModal}
         onClose={() => setShowDeleteModal(false)}
         onConfirm={handleConfirmDelete}
+      />
+
+      {/* Share Modal */}
+      <ShareModal
+        visible={showShareModal}
+        onClose={() => setShowShareModal(false)}
       />
     </div>
   );
