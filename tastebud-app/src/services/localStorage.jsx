@@ -34,18 +34,18 @@ export const saveUserToDB = (user) => {
 };
 
 export const getAllPosts = () => {
-  const posts = JSON.parse(localStorage.getItem("posts")) || [];
+  const posts = JSON.parse(localStorage.getItem(POSTS_KEY)) || [];
 
   if (posts.length === 0) {
     return defaultRecipes;
   }
   return posts;
 };
-    
-export const savePost = (post) => {
-    const posts = getAllPosts();
-    posts.push(post);
-    localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+
+export const savePostToDB = (newPost) => {
+  const posts = getAllPosts();
+  posts.unshift(newPost);
+  localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
 };
     
 export const getPostById = (id) => {
