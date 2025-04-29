@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './Navbar.css';
 
+import searchIcon from '@/assets/icons/search-white.png';
+
 const NavbarSearch = ({ placeholder = "Search...", onSearch }) => {
   const [searchText, setSearchText] = useState("");
 
@@ -13,6 +15,9 @@ const NavbarSearch = ({ placeholder = "Search...", onSearch }) => {
 
   return (
     <form className="navbar-search-container" onSubmit={handleSubmit}>
+      <div className="search-icon-wrapper">
+        <img src={searchIcon} alt="Search Icon"/>
+      </div>
       <input
         type="text"
         className="navbar-search-input"

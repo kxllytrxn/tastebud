@@ -1,4 +1,8 @@
 /* Navbar Styles */
+:root {
+  --navbar-height: 46px;
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -9,9 +13,12 @@
 }
 
 .navbar-logo h1 {
-    font-size: 1.5rem;
+    width: 48px;
+    height: 48px;
+    margin-right: 0;
+    /* font-size: 1.5rem;
     font-weight: 700;
-    color: #333;
+    color: #333; */
 }
 
 .navbar-links {
@@ -80,10 +87,12 @@ background-color: #0056b3;
   justify-content: space-between;
   align-items: center;
   padding: 8px 16px;
-  background-color: #f3f4f6;
+  background-color: var(--white);
   border-bottom: 1px solid #e5e7eb;
-  height: 64px;
+  height: var(--navbar-height);
   max-width: 100%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
 }
 
 .navbar-left {
@@ -121,18 +130,18 @@ background-color: #0056b3;
 .navbar-button {
   display: flex;
   align-items: center;
-  background: none;
-  border: 1px solid #e5e7eb;
+  background-color: var(--orange);
+  border: none;
   border-radius: 24px;
-  padding: 8px 16px;
-  font-size: 0.9rem;
+  padding: 10px 20px;
   cursor: pointer;
-  color: #374151;
-  font-weight: 500;
+  color: var(--white);
+  height: var(--navbar-height);
+  transition: background-color 0.3s linear;
 }
 
 .navbar-button:hover {
-  background-color: #e5e7eb;
+  background-color: var(--yellow);
 }
 
 .dropdown-arrow {
@@ -210,23 +219,52 @@ background-color: #0056b3;
 
 
 .navbar-search-container { 
-  position: relative;
-  width: 260px;
+  display: flex;
+  align-items: center;
+  border: 2px solid #3b7f3b;
+  border-radius: var(--navbar-height);
+  overflow: hidden;
+  width: 600px;
+  height: var(--navbar-height);
+  background-color: white;
+  margin-left: 0px;
+  box-sizing: border-box;
 }
 
 .navbar-search-input {
-  width: 100%;
-  height: 50px;
+  /* width: 100%; */
+  flex: 1;
+  border: none;
+  outline: none;
+  width: 340px;
+  height: 100%;
   padding: 0 16px;
-  border: 1px solid #e5e7eb;
-  border-radius: 24px;
+  border-radius: 0 var(--navbar-height) var(--navbar-height) 0;
+  box-sizing: border-box;
   background-color: white;
-  font-size: 0.9rem;
+  font-size: 1 rem;
+  cursor: text;
+}
+
+.search-icon-wrapper {
+  background-color: #3b7f3b;
+  width: var(--navbar-height);
+  height: var(--navbar-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  /* border-top-left-radius: var(--navbar-height);
+  border-bottom-left-radius: var(--navbar-height); */
+}
+
+.search-icon-wrapper img {
+  width: 20px;
+  height: 20px;
 }
 
 .navbar-search-input:focus {
   outline: none;
-  border-color: #d1d5db;
   box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
 }
 
@@ -244,6 +282,7 @@ background-color: #0056b3;
   
   .navbar-left {
     margin-bottom: 8px;
+    flex-grow: 1;
   }
   
   .navbar-search-container {

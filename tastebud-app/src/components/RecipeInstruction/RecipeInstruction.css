@@ -29,7 +29,7 @@
 }
 
   .see-more-btn:hover {
-    background-color: var(--orange-opacity);
+    background-color: var(--orange-hover);
   }
 
   .break-line {
