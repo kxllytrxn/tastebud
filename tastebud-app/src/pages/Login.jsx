@@ -14,7 +14,6 @@ const Login = () => {
         loginUser(email, password)
         .then(() => {
             navigate('/home'); 
-            printLocalStorage(); // debug statement - used to see if stored in local storage
         })
         .catch((err) => {
             console.log("error on login: ", err);

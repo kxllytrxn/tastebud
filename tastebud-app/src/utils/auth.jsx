@@ -3,18 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 // TEMPORARILY USE THE FAKE USER TO BYPASS LOGIN - 
 // ONCE MAIN COMPONENTS ARE DONE, THE IMPLEMENTATION CAN BE ACTUALLY DONE
-const fakeUser = {
-    id: 1,
-    email: 'johndoe',
-    first_name: 'john',
-    last_name: 'doe',
-    password: 'password', 
-    };
 
 export const findUserByEmail = (email) => {
     const users = getAllUsers();
     return users.find((user) => user.email === email);
-    };
+};
     
 // Login by email + password
 export const loginUser = async (email, password) => {
@@ -29,7 +22,7 @@ export const loginUser = async (email, password) => {
     return { success: true, user };
 };
     
-    // SIGNUP
+// SIGNUP
 export const signup = async (email, first_name, last_name, password) => {
     if (findUserByEmail(email)) {
         return { success: false, message: 'Email already registered' };
@@ -43,6 +36,8 @@ export const signup = async (email, first_name, last_name, password) => {
         last_name: last_name,
         created_at: new Date().toISOString(),
         saved_posts: [],
+        followers: 0,
+        following: 0,
         profile_photo_url: '', // default for now
         display_name: `${first_name} ${last_name}`,
         email_verified: false
@@ -50,9 +45,8 @@ export const signup = async (email, first_name, last_name, password) => {
     
     saveUserToDB(newUser);
     setUser(newUser);
-    
     return { success: true, user: newUser };
-    };
+};
     
 // LOGOUT
 export const logoutUser = () => {

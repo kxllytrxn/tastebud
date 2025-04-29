@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import './CreatePost.css'; // You'll need to create this CSS file
+import './CreatePost.css'; 
 import picIcon from './modal-icons/pic.png';
 import utencilIcon from './modal-icons/utencil.png';
 import plusIcon from './modal-icons/plus.png';
+import { savePostToDB, getLoggedInUser } from '@/services/localStorage';
+import { v4 as uuidv4 } from 'uuid';
+
 
 export const CreatePost = ({ visible, onClose }) => {
   const [postTitle, setPostTitle] = useState('');
@@ -18,6 +21,13 @@ export const CreatePost = ({ visible, onClose }) => {
     }
   };
 
+  const clearModal = () => {
+    setPostTitle('');
+    setCaption('');
+    setSelectedImage(null);
+    setLastSaved(null);
+  }
+
   const handleSaveAsDraft = () => {
     const currentTime = new Date();
     setLastSaved(currentTime);
@@ -25,8 +35,35 @@ export const CreatePost = ({ visible, onClose }) => {
   };
 
   const handleSave = () => {
-    console.log('Post saved', { postTitle, caption, selectedImage });
+    const loggedInUser = getLoggedInUser();
+    const timestamp = new Date().toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true,
+    });
+    const curr_user = {
+      name: loggedInUser.display_name,
+      avatar: loggedInUser.avatar, 
+    };
+    const newPost = {
+      id: uuidv4(),
+      user: curr_user,
+      title: postTitle,
+      caption: caption,
+      timestamp: timestamp,
+      image: selectedImage,
+      ingredients: [],
+      instructions: [],
+      comments: [],
+      initialLikes: 0
+    };  
+    savePostToDB(newPost);
+    console.log('Post saved', newPost);
     onClose();
+    clearModal();
   };
 
   const formatTime = (date) => {

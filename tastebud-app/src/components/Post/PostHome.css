@@ -127,3 +127,11 @@
 .comment-input::placeholder {
     color: #9ca3af;
 }
+
+.post-header-bar {
+    background-color: var(--orange);
+    height: 16px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    margin: -16px -16px 24px;
+}
