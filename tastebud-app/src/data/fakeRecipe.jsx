@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
-
 const defaultUser = {
   name: "James Smith",
   avatar: "https://images.squarespace-cdn.com/content/v1/598a797af5e23155afc4d592/1597998089824-UHZER996H8NB5EYYDFIW/AVI.JPG?format=2500w"
@@ -14,7 +12,7 @@ const fakeUser2 = {
 const defaultRecipes = [
   {
     "id": 0,
-    "user": "defaultUser",
+    "user": defaultUser,
     "title": "Vegan Chili",
     "description": "A delicious and hearty chili made with black beans and sweet potatoes.",
     "caption": "test",
@@ -27,7 +25,7 @@ const defaultRecipes = [
   },
   {
     "id": 1,
-    "user": "fakeUser2",
+    "user": defaultUser,
     "title": "Pesto Pasta",
     "description": "Creamy basil pesto tossed with fettuccine and cherry tomatoes.",
     "caption": "",
@@ -40,7 +38,7 @@ const defaultRecipes = [
   },
   {
     "id": 2,
-    "user": "defaultUser",
+    "user": fakeUser2,
     "title": "Salmon + Rice",
     "description": "Miso flavored salmon, air-fried paired with white rice.",
     "caption": "",
@@ -59,7 +57,7 @@ const defaultRecipes = [
   },
   {
     "id": 3,
-    "user": "defaultUser",
+    "user": fakeUser2,
     "title": "Avocado Toast",
     "description": "Toasted sourdough topped with mashed avocado and a sprinkle of chili flakes.",
     "caption": "",
@@ -72,7 +70,7 @@ const defaultRecipes = [
   },
   {
     "id": 4,
-    "user": "defaultUser",
+    "user": fakeUser2,
     "title": "Bibimbap Bowl",
     "description": "Korean rice bowl with sautéed veggies, fried egg, and gochujang sauce.",
     "caption": "",
@@ -85,7 +83,7 @@ const defaultRecipes = [
   },
   {
     "id": 5,
-    "user": "defaultUser",
+    "user": defaultUser,
     "title": "Shakshuka",
     "description": "Poached eggs simmered in a spicy tomato and pepper sauce.",
     "caption": "",
@@ -98,7 +96,7 @@ const defaultRecipes = [
   },
   {
     "id": 6,
-    "user": "defaultUser",
+    "user": defaultUser,
     "title": "Grilled Cheese & Tomato Soup",
     "description": "Classic melty sandwich paired with creamy tomato soup.",
     "caption": "",
@@ -111,7 +109,7 @@ const defaultRecipes = [
   },
   {
     "id": 7,
-    "user": "defaultUser",
+    "user": defaultUser,
     "title": "Fruit & Yogurt Parfait",
     "description": "Layers of granola, vanilla yogurt, and seasonal berries.",
     "caption": "",
@@ -124,7 +122,7 @@ const defaultRecipes = [
   },
   {
     "id": 8,
-    "user": "defaultUser",
+    "user": fakeUser2,
     "title": "Tofu Stir Fry",
     "description": "Pan-fried tofu with bell peppers, broccoli, and soy garlic glaze.",
     "caption": "",
@@ -137,7 +135,7 @@ const defaultRecipes = [
   },
   {
     "id": 9,
-    "user": "defaultUser",
+    "user":  fakeUser2,
     "title": "Matcha Pancakes",
     "description": "Fluffy green tea pancakes served with whipped cream and maple syrup.",
     "caption": "",

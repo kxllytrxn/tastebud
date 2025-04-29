@@ -11,7 +11,7 @@ import Comment from "@/components/Comment/Comment";
 const Post = ({
   user = { name: "John Doe", avatar: "https://images.squarespace-cdn.com/content/v1/598a797af5e23155afc4d592/1597998089824-UHZER996H8NB5EYYDFIW/AVI.JPG?format=2500w" },
   title = "Salmon and Rice",
-  timestamp = "March 8, 2025",
+  timestamp = new Date(),
   caption = "",
   image = null,
   description = "",
@@ -43,7 +43,6 @@ const Post = ({
     setAllComments([...allComments, newEntry]);
     setNewComment("");
   };
-
 
   return (
     <div className="card">

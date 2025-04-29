@@ -61,7 +61,7 @@ export const CreatePost = ({ visible, onClose }) => {
       initialLikes: 0
     };  
     savePostToDB(newPost);
-    console.log('Post saved', JSON.stringify(newPost));
+    console.log('Post saved', newPost);
     onClose();
     clearModal();
   };

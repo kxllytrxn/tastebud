@@ -60,6 +60,7 @@ const Home = () => {
         {sortedPosts ? (
           sortedPosts.map((post) => (
             <PostHome key={post.id}
+              user={post.user}
               timestamp={post.timestamp}
               caption={post.caption}
               title={post.title}
