@@ -38,7 +38,6 @@ const Home = () => {
   console.log(posts);
   const fakeComments = [{ name: "James Doe", text: "Looks great!", avatar: "https://i.pinimg.com/474x/f7/f4/86/f7f486d7d277227fd7c7fce2541807cc.jpg" }, { name: "Jane Doe", text: "Slay :)", avatar:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTo6kW9VIrbqGQB5tgpzN_YulvweOfOTxmDOw&s" }];
   const [createPostModalVisible, setCreatePostModalVisible] = useState(false);
-  
   useEffect(() => {
     if (!createPostModalVisible) {
       setPosts(getAllPosts());

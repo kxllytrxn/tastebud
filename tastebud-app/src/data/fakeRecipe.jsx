@@ -18,8 +18,31 @@ const defaultRecipes = [
     "caption": "test",
     "timestamp": "March 8, 2025, 4:35 PM",
     "image": "https://frommybowl.com/wp-content/uploads/2019/01/Easy_Vegan_Chili_OilFree_FromMyBowl-4.jpg",
-    "instructions": [],
-    "ingredients": [],
+    "instructions": [
+      "Prepare the vegetables: peel and dice the sweet potatoes, chop the onion, garlic, and bell peppers (if using).",
+      "Sauté the aromatics: in a large pot over medium heat, add olive oil and cook the onion and garlic for 2–3 minutes until translucent.",
+      "Add the sweet potatoes and cook for about 5 minutes, stirring occasionally, until they begin to soften.",
+      "Stir in chili powder, cumin, paprika, salt, and pepper. Toast the spices for 1 minute.",
+      "Add canned diced tomatoes (with juice), drained black beans, vegetable broth, and any other vegetables you're using. Stir to combine.",
+      "Bring to a boil, then reduce heat and simmer uncovered for 20–25 minutes, until the sweet potatoes are tender and the chili thickens.",
+      "Taste and adjust seasoning with additional salt, pepper, or spices as needed.",
+      "Serve hot with optional toppings like avocado, cilantro, lime wedges, or vegan sour cream."
+    ],
+    "ingredients": [
+      "2 medium sweet potatoes, peeled and diced",
+      "1 medium yellow onion, diced",
+      "3 cloves garlic, minced",
+      "1 red bell pepper, chopped (optional)",
+      "1 tablespoon olive oil",
+      "1 tablespoon chili powder",
+      "1 teaspoon ground cumin",
+      "1/2 teaspoon smoked paprika",
+      "Salt and black pepper to taste",
+      "1 (15 oz) can black beans, drained and rinsed",
+      "1 (15 oz) can diced tomatoes",
+      "1.5 cups vegetable broth",
+      "Optional toppings: avocado, fresh cilantro, lime wedges, vegan sour cream"
+    ],
     "comments": [],
     "initialLikes": 0
   },

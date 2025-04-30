@@ -36,6 +36,8 @@ const Post = ({
     }
     setLiked(!liked);
   };
+  const fakeUser = 'https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/11688145/pokemon_piplup.png?quality=90&strip=all&crop=0,3.4685863874346,100,93.062827225131'
+
 
   const [newComment, setNewComment] = useState("");
   const [allComments, setAllComments] = useState(comments || []);
@@ -71,7 +73,7 @@ const Post = ({
       <div className="post-header-bar"></div>
       <div className="post-header">
         <div className="avatar">
-          <img src={user.avatar} alt={`${user.name}'s avatar`} />
+          <img src={fakeUser} alt={`${user.name}'s avatar`} />
         </div>
         <div className="post-header-info">
           <div className="username">{user.name}</div>
