@@ -61,7 +61,7 @@ main {
 }
   
 
-.home-container {
+.home-container, .user-container {
   display: flex;
   justify-content: space-evenly;
   padding: 24px;
@@ -142,4 +142,20 @@ main {
   
 }
 
+/* User Profile Styling */
+.user-container {
+  display: flex;
+  flex-direction: column;
+}
 
+.main-content {
+  display: flex;
+  flex-direction: row;
+  column-gap: 3%;
+}
+
+.activity-section {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2
+}

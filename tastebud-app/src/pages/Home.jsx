@@ -3,14 +3,14 @@ import PostHome from '@/components/Post/PostHome';
 import SideBarUser from '@/components/SideBarUser/SideBarUser.jsx';
 import IconButton from '@/components/Button/IconButton';
 import { getAllUsers, getAllPosts, getLoggedInUser } from '@/services/localStorage';
-import ManageInfo from '@/components/ManageInfo/ManageInfo';
+import ManageAccount from '@/components/ManageAccount/ManageAccount';
 import PeopleYouMayKnow from '@/components/PeopleYouMayKnow/PeopleYouMayKnow';
 import '@/main.css';
 import { CreatePost } from '@/components/Modal/CreatePost';
 
 const RightSidebar = () => (
   <div className="sidebar">
-    <ManageInfo />
+    <ManageAccount />
     <PeopleYouMayKnow />
   </div>
 );
@@ -20,12 +20,10 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     const storedPosts = getAllPosts();
-    console.log("Fetched from localStorage:", storedPosts);
     setPosts(storedPosts);
   }, []); 
   const sortedPosts = [...posts].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-  console.log("sorted: ", sortedPosts)
-  // const comments = getAllComments();
+
   const loggedInUser = getLoggedInUser();
   const signUpDate = new Date(loggedInUser.created_at);
   const signUpDateFormatted = signUpDate.toLocaleDateString("en-US", {
@@ -33,17 +31,15 @@ const Home = () => {
     month: "long",
     day: "numeric",
   });
-  console.log(signUpDate)
-  console.log(loggedInUser);
-  console.log(posts);
+
   const fakeComments = [{ name: "James Doe", text: "Looks great!", avatar: "https://i.pinimg.com/474x/f7/f4/86/f7f486d7d277227fd7c7fce2541807cc.jpg" }, { name: "Jane Doe", text: "Slay :)", avatar:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTo6kW9VIrbqGQB5tgpzN_YulvweOfOTxmDOw&s" }];
   const [createPostModalVisible, setCreatePostModalVisible] = useState(false);
-  
   useEffect(() => {
     if (!createPostModalVisible) {
       setPosts(getAllPosts());
     }
   }, [createPostModalVisible, setPosts]);
+
   return (
     <div className="home-container">
       <SideBarUser 
@@ -57,9 +53,10 @@ const Home = () => {
         <div className="yellow-header-bar"></div>
         <button className="btn-create-post" onClick={() => setCreatePostModalVisible(!createPostModalVisible)}>Create a post &#20;→</button>
       </div>
-        {sortedPosts ? (
+        {sortedPosts.length > 0 ? (
           sortedPosts.map((post) => (
             <PostHome key={post.id}
+              id={post.id}
               user={post.user}
               timestamp={post.timestamp}
               caption={post.caption}
@@ -67,6 +64,7 @@ const Home = () => {
               image={post.image} 
               comments={post.comments}
               instructions={post.instructions}
+              liked={post.liked}
               initialLikes={post.initialLikes}
             />
           ))) : (<p>No posts yet. Start by creating one!</p>)

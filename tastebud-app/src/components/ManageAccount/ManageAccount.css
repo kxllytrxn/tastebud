@@ -1,0 +1,47 @@
+.header-bar {
+    background-color: var(--green);
+    height: 16px;
+    width: 100%;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .manage-account-card {
+    background-color: var(--white);
+    border-radius: 12px;
+    width: 300px;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    overflow: hidden;
+    padding: 12px 24px 12px;
+    position: relative;
+    max-height: 500px;
+    margin-bottom: 24px;
+  }
+
+.menu-entry {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+
+  .menu-entry:last-child {
+    margin-bottom: 0;
+  }
+  
+  .menu-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: scale-down;
+  }
+  
+  .menu-entry:hover {
+    cursor: pointer;
+    color: var(--yellow);
+    text-decoration: underline;
+  }

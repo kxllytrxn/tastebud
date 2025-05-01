@@ -59,9 +59,11 @@ export const CreatePost = ({ visible, onClose }) => {
       minute: 'numeric',
       hour12: true,
     });
+    console.log(loggedInUser)
     const curr_user = {
+      user_id: loggedInUser.id,
       name: loggedInUser.display_name,
-      avatar: loggedInUser.avatar, 
+      avatar: loggedInUser.profile_photo_url, 
     };
     
     // Filter out empty ingredients and instructions
@@ -80,7 +82,8 @@ export const CreatePost = ({ visible, onClose }) => {
       instructions: filteredInstructions,
       comments: [],
       initialLikes: 0
-    };  
+    };
+
     savePostToDB(newPost);
     console.log('Post saved', newPost);
     onClose();
