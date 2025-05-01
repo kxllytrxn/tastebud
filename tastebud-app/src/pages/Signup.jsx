@@ -24,6 +24,8 @@ const Signup = () => {
 
   return (
     <div className="signup-container">
+      <div className="login-header-bar"></div>
+
       <h2>Sign Up</h2>
       {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
@@ -69,7 +71,7 @@ const Signup = () => {
         <Button 
           buttonText="Sign Up"
           onClick={handleSubmit}
-          variant = "secondary"
+          variant = "primary"
           color = "green"
         />
         {/* <button type="submit" className="btn-signup">Sign Up</button> */}
