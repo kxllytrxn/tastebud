@@ -6,11 +6,8 @@ import Comment from "@/components/Comment/Comment";
 import { DeleteModal } from '@/components/Modal/DeleteModal';
 import { ShareModal } from '@/components/Modal/ShareModal';
 import { getAllPosts, setAllPosts, getLoggedInUser } from "@/services/localStorage";
+import { CreatePost } from '@/components/Modal/CreatePost';
 
-// example of an import for utils to getPosts
-// import { getPosts, deletePost, editPost } from '@/utils/PostUtils'; 
-
-// here postId is a single argument, but we can add more!
 
 const PostHome = ({
   id,
@@ -23,9 +20,11 @@ const PostHome = ({
   image = null,
   description = "",
   instructions = [],
+  ingredients = [],
   comments = null,
   liked = false,
   likes = 0,
+  onPostUpdated = null,
 }) => {
   const initialPost = {
     id,
@@ -34,20 +33,36 @@ const PostHome = ({
     timestamp,
     caption,
     image,
-    description,
+    recipeDescription: description,
+    ingredients,
     instructions,
     comments: comments || [],
     liked: liked ?? false,
     likes: likes,
   };
 
-  const currUser = getLoggedInUser();
+  const currUser = getLoggedInUser()
+  const [isCurrentUserPost, setIsCurrentUserPost] = useState(false);
 
   const [post, setPost] = useState(() => {
     const allPosts = getAllPosts();
     return allPosts.find(p => p.id === id) || initialPost;
   });
 
+  // Check if the post belongs to the current user
+  useEffect(() => {
+    if (currUser && post.user) {
+      // Check if user_id property exists and matches
+      if (post.user.user_id && currUser.id) {
+        setIsCurrentUserPost(post.user.user_id === currUser.id);
+      } else {
+        // Fallback to name comparison if IDs aren't available
+        setIsCurrentUserPost(post.user.name === currUser.display_name);
+      }
+    }
+  }, [currUser, post.user]);
+
+  // updates when something changes
   useEffect(() => {
     const allPosts = getAllPosts();
     const updatedPosts = allPosts.map(p =>
@@ -56,10 +71,10 @@ const PostHome = ({
     setAllPosts(updatedPosts);
   }, [post, id]);
 
-
   const [showMenu, setShowMenu] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   // const [liked, setLiked] = useState(false);
   // const [likes, setLikes] = useState(initialLikes);
@@ -103,16 +118,36 @@ const PostHome = ({
     setShowDeleteModal(true);
   };
 
+  const handleEditClick = () => {
+    setShowMenu(false);
+    setShowEditModal(true);
+  };
+
   const handleShareClick = () => {
     setShowMenu(false);
     setShowShareModal(true);
   };
 
+  const handleEditClose = () => {
+    setShowEditModal(false);
+    // Trigger refresh if callback is provided
+    if (onPostUpdated) {
+      onPostUpdated();
+    }
+  };
+
   const handleConfirmDelete = () => {
-    console.log('Post deleted');
-    // Here you would call your delete function, e.g.:
-    // deletePost(postId);
+    deletePostById(id);
+    console.log('Post deleted', id);
     setShowDeleteModal(false);
+    
+    // Trigger refresh if callback is provided
+    if (onPostUpdated) {
+      onPostUpdated();
+    } else if (window) {
+      // Fallback to page reload if no callback
+      window.location.reload();
+    }
   };
 
   return (
@@ -128,15 +163,15 @@ const PostHome = ({
           <div className="timestamp">{timestamp}</div>
         </div>
 
-        {/* Options Menu */}
+        {/* Options Menu - Only show for the current user's posts */}
         <div className="post-menu-container">
           <button className="menu-button" onClick={() => setShowMenu(!showMenu)}>
             ⋯
           </button>
           {showMenu && (
             <div className="menu-dropdown">
-              <button>Edit</button>
-              <button onClick={handleDeleteClick}>Delete</button>
+              {isCurrentUserPost && <button onClick={handleEditClick}>Edit</button>}
+              {isCurrentUserPost && <button onClick={handleDeleteClick}>Delete</button>}
               <button onClick={handleShareClick}>Share</button>
             </div>
           )}
@@ -206,6 +241,13 @@ const PostHome = ({
       <ShareModal
         visible={showShareModal}
         onClose={() => setShowShareModal(false)}
+      />
+
+      {/* Edit Modal */}
+      <CreatePost
+        visible={showEditModal}
+        onClose={handleEditClose}
+        postToEdit={post}
       />
     </div>
   );

@@ -5,7 +5,7 @@ import RecipeInstruction from "@/components/RecipeInstruction/RecipeInstruction"
 import Comment from "@/components/Comment/Comment";
 import { DeleteModal } from '@/components/Modal/DeleteModal';
 import { ShareModal } from '@/components/Modal/ShareModal';
-import { getLoggedInUser } from '../../services/localStorage';
+import { getLoggedInUser, deletePostById } from '../../services/localStorage';
 
 // example of an import for utils to getPosts
 // import { getPosts, deletePost, editPost } from '@/utils/PostUtils'; 
@@ -40,7 +40,8 @@ const PostProfile = ({
     likes: likes,
   };
 
-  const currUser = getLoggedInUser()
+  const currUser = getLoggedInUser();
+  const [isCurrentUserPost, setIsCurrentUserPost] = useState(false);
 
   // populate initial post
   const [post, setPost] = useState(() => {
@@ -51,6 +52,19 @@ const PostProfile = ({
       return initialPost;
     }
   });
+
+  // Check if the post belongs to the current user
+  useEffect(() => {
+    if (currUser && post.user) {
+      // Check if user_id property exists and matches
+      if (post.user.user_id && currUser.id) {
+        setIsCurrentUserPost(post.user.user_id === currUser.id);
+      } else {
+        // Fallback to name comparison if IDs aren't available
+        setIsCurrentUserPost(post.user.name === currUser.display_name);
+      }
+    }
+  }, [currUser, post.user]);
 
   // updates when something changes
   useEffect(() => {
@@ -102,10 +116,14 @@ const PostProfile = ({
   };
 
   const handleConfirmDelete = () => {
-    console.log('Post deleted');
-    // Here you would call your delete function, e.g.:
-    // deletePost(postId);
+    deletePostById(id);
+    console.log('Post deleted', id);
     setShowDeleteModal(false);
+    
+    // Refresh the page to reflect the changes
+    if (window) {
+      window.location.reload();
+    }
   };
 
   return (
@@ -121,15 +139,15 @@ const PostProfile = ({
           <div className="timestamp">{timestamp}</div>
         </div>
 
-        {/* Options Menu */}
+        {/* Options Menu - Only show for the current user's posts */}
         <div className="post-menu-container">
           <button className="menu-button" onClick={() => setShowMenu(!showMenu)}>
             ⋯
           </button>
           {showMenu && (
             <div className="menu-dropdown">
-              <button>Edit</button>
-              <button onClick={handleDeleteClick}>Delete</button>
+              {isCurrentUserPost && <button>Edit</button>}
+              {isCurrentUserPost && <button onClick={handleDeleteClick}>Delete</button>}
               <button onClick={handleShareClick}>Share</button>
             </div>
           )}

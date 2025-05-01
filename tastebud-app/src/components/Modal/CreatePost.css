@@ -490,3 +490,33 @@
 .directions-label, .directions-subtitle {
   color: var(--green) !important;
 }
+
+.input-error {
+  border: 1px solid #ff4d4f !important;
+  background-color: #fff2f0;
+}
+
+.image-selector-error {
+  border: 1px solid #ff4d4f !important;
+  background-color: #fff2f0;
+}
+
+.error-message {
+  color: #ff4d4f;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.required {
+  color: #ff4d4f;
+  margin-left: 4px;
+}
+
+.form-error-summary {
+  color: #ff4d4f;
+  font-size: 14px;
+  margin-top: 8px;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+}

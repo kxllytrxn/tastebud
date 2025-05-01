@@ -65,3 +65,15 @@ export const deletePostById = (id) => {
     localStorage.setItem(POSTS_KEY, JSON.stringify(filtered));
 };
     
+export const editPost = (updatedPost) => {
+    const posts = getAllPosts();
+    const index = posts.findIndex(post => post.id === updatedPost.id);
+    
+    if (index !== -1) {
+        posts[index] = updatedPost;
+        localStorage.setItem(POSTS_KEY, JSON.stringify(posts));
+        return true;
+    }
+    return false;
+};
+    
