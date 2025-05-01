@@ -181,3 +181,24 @@ main {
   flex-direction: column;
   flex-grow: 2
 }
+
+.activity-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.activity-header h3 {
+  font-weight: 600;
+  font-size: 30px;
+}
+
+.see-all-btn {
+  height: 40px;
+  border-radius: 16px;
+  border: none;
+  color: var(--white);
+  background-color: var(--orange);
+  padding: 5px 10px;
+}

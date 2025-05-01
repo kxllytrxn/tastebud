@@ -38,7 +38,7 @@ export const signup = async (email, first_name, last_name, password) => {
         saved_posts: [],
         followers: 0,
         following: 0,
-        profile_photo_url: '', // default for now
+        profile_photo_url: 'https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/11688145/pokemon_piplup.png?quality=90&strip=all&crop=0,3.4685863874346,100,93.062827225131', // default for now
         display_name: `${first_name} ${last_name}`,
         email_verified: false
     };

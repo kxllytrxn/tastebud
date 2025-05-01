@@ -5,8 +5,9 @@ import RecipeInstruction from "@/components/RecipeInstruction/RecipeInstruction"
 import Comment from "@/components/Comment/Comment";
 import { DeleteModal } from '@/components/Modal/DeleteModal';
 import { ShareModal } from '@/components/Modal/ShareModal';
+import { getAllPosts, setAllPosts, getLoggedInUser } from "@/services/localStorage";
 import { CreatePost } from '@/components/Modal/CreatePost';
-import { getLoggedInUser, deletePostById } from '../../services/localStorage';
+
 
 const PostHome = ({
   id,
@@ -22,7 +23,7 @@ const PostHome = ({
   ingredients = [],
   comments = null,
   liked = false,
-  initialLikes = 0,
+  likes = 0,
   onPostUpdated = null,
 }) => {
   const initialPost = {
@@ -37,20 +38,15 @@ const PostHome = ({
     instructions,
     comments: comments || [],
     liked: liked ?? false,
-    likes: initialLikes,
+    likes: likes,
   };
 
   const currUser = getLoggedInUser()
   const [isCurrentUserPost, setIsCurrentUserPost] = useState(false);
 
-  // populate initial post
   const [post, setPost] = useState(() => {
-    try {
-      const saved = JSON.parse(localStorage.getItem(`${id}`));
-      return saved && saved.user ? saved : initialPost;
-    } catch (e) {
-      return initialPost;
-    }
+    const allPosts = getAllPosts();
+    return allPosts.find(p => p.id === id) || initialPost;
   });
 
   // Check if the post belongs to the current user
@@ -68,7 +64,11 @@ const PostHome = ({
 
   // updates when something changes
   useEffect(() => {
-    localStorage.setItem(`${id}`, JSON.stringify(post));
+    const allPosts = getAllPosts();
+    const updatedPosts = allPosts.map(p =>
+      p.id === post.id ? post : p
+    );
+    setAllPosts(updatedPosts);
   }, [post, id]);
 
   const [showMenu, setShowMenu] = useState(false);
@@ -83,28 +83,33 @@ const PostHome = ({
   const toggleLike = () => {
     const newLiked = !post.liked;
     const newLikes = newLiked ? post.likes + 1 : post.likes - 1;
-
+  
     setPost(prev => ({
       ...prev,
-      likes: newLikes,
       liked: newLiked,
+      likes: newLikes,
     }));
   };
   const fakeUser = 'https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/11688145/pokemon_piplup.png?quality=90&strip=all&crop=0,3.4685863874346,100,93.062827225131'
   const [newComment, setNewComment] = useState("");
-  // const [allComments, setAllComments] = useState(comments || []);
   const commentInputRef = useRef(null);
-
+    
   const handleAddComment = () => {
     if (newComment.trim() === "") return;
 
-    const newEntry = { name: currUser.display_name, text: newComment, avatar: currUser.profile_photo_url};
+    const newEntry = {
+      name: currUser.display_name,
+      text: newComment,
+      avatar: currUser.profile_photo_url,
+    };
+
     const updatedComments = [...post.comments, newEntry];
 
     setPost(prev => ({
       ...prev,
       comments: updatedComments,
     }));
+
     setNewComment("");
   };
 

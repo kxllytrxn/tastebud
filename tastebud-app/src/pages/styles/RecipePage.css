@@ -30,7 +30,7 @@
     margin: -32px -32px 24px; 
 }
 
-.recipe-header h1 {
+.recipe-page-header h1 {
     font-size: 32px;
     font-weight: 600; 
     color: var(--black);

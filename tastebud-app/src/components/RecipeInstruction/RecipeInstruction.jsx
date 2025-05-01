@@ -10,8 +10,6 @@ const RecipeInstruction = ({ instructions }) => {
     return (
        <div className="recipe-instructions-container">
          <div className="recipe-instructions">
-            {/* <hr className="break-line" /> */}
-
             <h4>Instructions</h4>
             <ol className="instruction-list">
                 {visibleInstructions.map((step, idx) => (
