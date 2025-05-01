@@ -1,0 +1,170 @@
+.share-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.share-modal-content {
+  background-color: white;
+  border-radius: 12px;
+  width: 420px;
+  max-width: 90%;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: slideUp 0.25s ease-out;
+  transform-origin: bottom center;
+}
+
+.share-modal-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(33, 150, 243, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e3f2fd;
+  position: relative;
+}
+
+.share-modal-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, #1976d2, #42a5f5);
+}
+
+.share-modal-header h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1565c0;
+  letter-spacing: -0.3px;
+}
+
+.share-modal-close-button {
+  background: none;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: #666;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+  margin: -8px;
+}
+
+.share-modal-close-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.share-modal-body {
+  padding: 24px;
+  line-height: 1.5;
+}
+
+.share-instruction {
+  margin: 0 0 16px;
+  font-size: 15px;
+  color: #444;
+}
+
+.link-container {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+}
+
+.link-text {
+  flex: 1;
+  font-family: monospace;
+  font-size: 15px;
+  color: #333;
+  margin-right: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.copy-button {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.copy-button:hover {
+  background-color: #1976d2;
+}
+
+.clipboard-icon {
+  font-size: 15px;
+}
+
+.copied-message {
+  color: #43a047;
+  font-size: 14px;
+  margin: 8px 0 0;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.share-modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.confirm-button {
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 22px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+}
+
+.confirm-button:hover {
+  background-color: #1976d2;
+  box-shadow: 0 3px 10px rgba(33, 150, 243, 0.4);
+} 

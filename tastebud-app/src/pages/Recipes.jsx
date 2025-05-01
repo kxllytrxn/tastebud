@@ -14,10 +14,10 @@ const Recipes = () => {
         const storedPosts = getAllPosts();
         console.log("POSTS: ", storedPosts)
         if (storedPosts.length === 0) {
-          setAllPosts(defaultRecipes); // seed if empty
           setRecipes(defaultRecipes);
         } else {
-          setRecipes(storedPosts);
+            const recipes = storedPosts.filter(post => post.instructions.length > 0)
+          setRecipes(recipes);
         }
     }, []);
     

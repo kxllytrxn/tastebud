@@ -3,6 +3,8 @@ import "./PostHome.css";
 import IconButton from '@/components/Button/IconButton';
 import RecipeInstruction from "@/components/RecipeInstruction/RecipeInstruction";
 import Comment from "@/components/Comment/Comment";
+import { DeleteModal } from '@/components/Modal/DeleteModal';
+import { ShareModal } from '@/components/Modal/ShareModal';
 
 // example of an import for utils to getPosts
 // import { getPosts, deletePost, editPost } from '@/utils/PostUtils'; 
@@ -11,15 +13,17 @@ import Comment from "@/components/Comment/Comment";
 const Post = ({
   user = { name: "John Doe", avatar: "https://images.squarespace-cdn.com/content/v1/598a797af5e23155afc4d592/1597998089824-UHZER996H8NB5EYYDFIW/AVI.JPG?format=2500w" },
   title = "Salmon and Rice",
-  timestamp = "March 8, 2025",
-  caption = "Made dinner with @Jane Doe",
+  timestamp = new Date(),
+  caption = "",
   image = null,
-  description = "Miso glazed Salmon with rice",
+  description = "",
   instructions = [],
   comments = null,
   initialLikes = 0,
 }) => {
   const [showMenu, setShowMenu] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
 
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(initialLikes);
@@ -44,10 +48,27 @@ const Post = ({
     setNewComment("");
   };
 
+  const handleDeleteClick = () => {
+    setShowMenu(false);
+    setShowDeleteModal(true);
+  };
+
+  const handleShareClick = () => {
+    setShowMenu(false);
+    setShowShareModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    console.log('Post deleted');
+    // Here you would call your delete function, e.g.:
+    // deletePost(postId);
+    setShowDeleteModal(false);
+  };
 
   return (
     <div className="card">
       {/* Header */}
+      <div className="post-header-bar"></div>
       <div className="post-header">
         <div className="avatar">
           <img src={user.avatar} alt={`${user.name}'s avatar`} />
@@ -57,7 +78,7 @@ const Post = ({
           <div className="timestamp">{timestamp}</div>
         </div>
 
-        {/* ⋯ Options Menu */}
+        {/* Options Menu */}
         <div className="post-menu-container">
           <button className="menu-button" onClick={() => setShowMenu(!showMenu)}>
             ⋯
@@ -65,8 +86,8 @@ const Post = ({
           {showMenu && (
             <div className="menu-dropdown">
               <button>Edit</button>
-              <button>Delete</button>
-              <button>Share</button>
+              <button onClick={handleDeleteClick}>Delete</button>
+              <button onClick={handleShareClick}>Share</button>
             </div>
           )}
         </div>
@@ -97,7 +118,7 @@ const Post = ({
           icon="💬"
           onClick={() => commentInputRef.current?.focus()}
         />
-        <IconButton icon="🔗" onClick={() => console.log('Share clicked')} />
+        <IconButton icon="🔗" onClick={handleShareClick} />
       </div>
 
       {/* Like and Comment Count */}
@@ -124,6 +145,18 @@ const Post = ({
         }}
       />
 
+      {/* Delete Modal */}
+      <DeleteModal 
+        visible={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        onConfirm={handleConfirmDelete}
+      />
+
+      {/* Share Modal */}
+      <ShareModal
+        visible={showShareModal}
+        onClose={() => setShowShareModal(false)}
+      />
     </div>
   );
 };

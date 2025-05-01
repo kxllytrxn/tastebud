@@ -1,35 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PostHome from '@/components/Post/PostHome';
 import SideBarUser from '@/components/SideBarUser/SideBarUser.jsx';
 import IconButton from '@/components/Button/IconButton';
+import { getAllUsers, getAllPosts, getLoggedInUser } from '@/services/localStorage';
 import ManageInfo from '@/components/ManageInfo/ManageInfo';
 import PeopleYouMayKnow from '@/components/PeopleYouMayKnow/PeopleYouMayKnow';
 import '@/main.css';
-
-// Placeholder Components - TODO: REMOVE LATER
-
-const CreatePost = () => (
-  <div className="card">
-    <button className="btn-create-post">Create a post →</button>
-  </div>
-);
-
-const PostItem = () => (
-  <div className="card">
-    <div className="card-text">John Doe • March 8, 2025</div>
-    <h2 className="card-title">Salmon and Rice</h2>
-    <div
-      className="card-img"
-      style={{ height: "192px", backgroundColor: "#e5e7eb", margin: "8px 0" }}
-    />
-    <div className="card-footer icon-buttons-container">
-      <IconButton icon="🔗" onClick={() => console.log('Share clicked')} />
-      <IconButton icon="🤍" onClick={() => console.log('Like clicked')} />
-      <IconButton icon="💬" onClick={() => console.log('Comment clicked')} />
-    </div>
-    <div className="card-text">James Doe commented...</div>
-  </div>
-);
+import { CreatePost } from '@/components/Modal/CreatePost';
 
 const RightSidebar = () => (
   <div className="sidebar">
@@ -39,30 +16,67 @@ const RightSidebar = () => (
 );
 
 const Home = () => {
+  // const users = getAllUsers();
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    const storedPosts = getAllPosts();
+    console.log("Fetched from localStorage:", storedPosts);
+    setPosts(storedPosts);
+  }, []); 
+  const sortedPosts = [...posts].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+  console.log("sorted: ", sortedPosts)
+  // const comments = getAllComments();
+  const loggedInUser = getLoggedInUser();
+  const signUpDate = new Date(loggedInUser.created_at);
+  const signUpDateFormatted = signUpDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  console.log(signUpDate)
+  console.log(loggedInUser);
+  console.log(posts);
+  const fakeComments = [{ name: "James Doe", text: "Looks great!", avatar: "https://i.pinimg.com/474x/f7/f4/86/f7f486d7d277227fd7c7fce2541807cc.jpg" }, { name: "Jane Doe", text: "Slay :)", avatar:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTo6kW9VIrbqGQB5tgpzN_YulvweOfOTxmDOw&s" }];
+  const [createPostModalVisible, setCreatePostModalVisible] = useState(false);
+  
+  useEffect(() => {
+    if (!createPostModalVisible) {
+      setPosts(getAllPosts());
+    }
+  }, [createPostModalVisible, setPosts]);
   return (
-    <div className="container">
-        <SideBarUser 
-            name="John Doe"
-            followers={40}
-            following={23}
-            lastMealDate="April 10, 2025"
-        />      
+    <div className="home-container">
+      <SideBarUser 
+          name={loggedInUser.display_name}
+          followers={loggedInUser.followers ? loggedInUser.followers : 0}
+          following={loggedInUser.following ? loggedInUser.following : 0}
+          signUpDate={signUpDateFormatted}
+      />      
       <main>
-        <CreatePost />
-        <PostHome
-          image="https://assets.epicurious.com/photos/5f32b611f1722a2c13407e4e/1:1/w_2560%2Cc_limit/miso-glazed-salmon-recipe-BA-081120.jpg" 
-          comments={[{ name: "James Doe", text: "Looks great!", avatar: "https://i.pinimg.com/474x/f7/f4/86/f7f486d7d277227fd7c7fce2541807cc.jpg" }, { name: "Jane Doe", text: "Slay :)", avatar:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTo6kW9VIrbqGQB5tgpzN_YulvweOfOTxmDOw&s" }]}
-          instructions={[
-            "Cook the rice",
-            "Season the salmon",
-            "Pan-fry for 3 minutes each side",
-            "Serve with soy sauce",
-          ]}
-        />
-        <PostItem />
-        <PostItem />
+      <div className="card">
+        <div className="yellow-header-bar"></div>
+        <button className="btn-create-post" onClick={() => setCreatePostModalVisible(!createPostModalVisible)}>Create a post &#20;→</button>
+      </div>
+        {sortedPosts ? (
+          sortedPosts.map((post) => (
+            <PostHome key={post.id}
+              user={post.user}
+              timestamp={post.timestamp}
+              caption={post.caption}
+              title={post.title}
+              image={post.image} 
+              comments={post.comments}
+              instructions={post.instructions}
+              initialLikes={post.initialLikes}
+            />
+          ))) : (<p>No posts yet. Start by creating one!</p>)
+        }
       </main>
       <RightSidebar />
+      <CreatePost 
+        visible={createPostModalVisible}
+        onClose={() => setCreatePostModalVisible(false)}
+      />
     </div>
   );
 };

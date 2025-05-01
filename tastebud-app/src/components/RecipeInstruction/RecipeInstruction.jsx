@@ -4,7 +4,6 @@ import './RecipeInstruction.css';
 const RecipeInstruction = ({ instructions }) => {
     const [expandedRecipe, setExpandedRecipe] = useState(false);
     const display_limit = 2;
-
     const visibleInstructions = expandedRecipe ? instructions : instructions.slice(0, display_limit);
 
     if (!instructions || instructions.length === 0) return null;
@@ -20,7 +19,6 @@ const RecipeInstruction = ({ instructions }) => {
                 ))}
             </ol>
             {instructions.length > display_limit && (
-
                 // later replace this with one our buttons
                 <button className="see-more-btn" onClick={() => setExpandedRecipe(!expandedRecipe)}>
                 {expandedRecipe ? 'See Less' : 'See More'}

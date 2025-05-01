@@ -3,11 +3,11 @@
     border-radius: 12px;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
     overflow: hidden;
-    max-width: 300px;
+    max-width: 280px;
     font-family: 'Inter', sans-serif;
     display: flex;
     flex-direction: column;
-    margin: 20px;
+    margin: 0px 10px 15px;
     text-decoration: none;
     transition: box-shadow 0.2s ease-in-out;
     transition: transform 0.2s ease-in-out;
@@ -38,7 +38,6 @@
     margin-bottom: 12px;
 } 
 
-  
 .recipe-content {
    display: flex; 
     flex-direction: column;
@@ -47,53 +46,36 @@
   
 }
   
-  .recipe-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #2D2D2D;
-    margin-top: 0px;
-    margin-bottom: 4px;
-  }
-  
-  .recipe-description {
-    font-size: 15px;
-    color: #2D2D2D;
-    opacity: 0.85;
-    margin-bottom: 12px;
-  }
-  
-  .recipe-instructions h4 {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: #2D2D2D;
-  }
-  
-  .instruction-list {
-    list-style: decimal;
-    margin-left: 20px;
-    padding-left: 0;
-    color: #2D2D2D;
-    font-size: 15px;
-    line-height: 1.6;
-    margin-bottom: 12px;
-  }
-  
-  .see-more-btn {
-    background-color: #F26733;
-    color: #fff;
-    font-weight: 600;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .see-more-btn:hover {
-    background-color: #FEA914;
-  }
+.recipe-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2D2D2D;
+  margin-top: 0px;
+  margin-bottom: 4px;
+}
+
+.recipe-description {
+  font-size: 15px;
+  color: #2D2D2D;
+  opacity: 0.85;
+  margin-bottom: 12px;
+}
+
+.see-more-btn {
+  background-color: var(--orange);
+  color: #fff;
+  font-weight: 600;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.see-more-btn:hover {
+  background-color: var(--orange-opacity);
+}
 
 a {
     text-decoration: none;

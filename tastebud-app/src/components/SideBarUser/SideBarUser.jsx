@@ -3,7 +3,7 @@ import './SideBarUser.css';
 import "@/main.css"
 
 
-const SideBarUser = ({ name, followers, following, lastMealDate }) => {
+const SideBarUser = ({ name, followers, following, signUpDate }) => {
     return (
       <div className="sidebar-user">
         <div className="header-bar"></div>
@@ -14,7 +14,7 @@ const SideBarUser = ({ name, followers, following, lastMealDate }) => {
           {followers} followers | {following} following
         </p>
   
-        <p className="last-meal">Last Meal Posted: <span>{lastMealDate}</span></p>
+        <p className="last-meal">Tastebud Member Since: <span>{signUpDate}</span></p>
   
         <div className="meal-preview">
           <div className="meal-box" />
