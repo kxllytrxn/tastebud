@@ -7,6 +7,8 @@ import ManageAccount from '@/components/ManageAccount/ManageAccount';
 import PeopleYouMayKnow from '@/components/PeopleYouMayKnow/PeopleYouMayKnow';
 import '@/main.css';
 import { CreatePost } from '@/components/Modal/CreatePost';
+import addimage from '@/assets/icons/addimage-darkgrey-outline.png';
+import utensils from '@/assets/icons/utensils-darkgrey-outline.png';
 
 const RightSidebar = () => (
   <div className="sidebar">
@@ -55,7 +57,14 @@ const Home = () => {
       <main>
       <div className="card">
         <div className="yellow-header-bar"></div>
-        <button className="btn-create-post" onClick={() => setCreatePostModalVisible(!createPostModalVisible)}>Create a post &#20;→</button>
+        <div className="create-post-row">
+          <button className="btn-create-post" onClick={() => setCreatePostModalVisible(!createPostModalVisible)}>Create a post &#20;→</button>
+          
+          <div className="create-post-icons">
+            <img src={addimage} alt="Add Image" onClick={() => setCreatePostModalVisible(!createPostModalVisible)}/>
+            <img src={utensils} alt="Add Recipe" onClick={() => setCreatePostModalVisible(!createPostModalVisible)}/>
+          </div>
+        </div>
       </div>
         {sortedPosts ? (
           sortedPosts.map((post) => (
