@@ -5,7 +5,8 @@ import RecipeInstruction from "@/components/RecipeInstruction/RecipeInstruction"
 import Comment from "@/components/Comment/Comment";
 import { DeleteModal } from '@/components/Modal/DeleteModal';
 import { ShareModal } from '@/components/Modal/ShareModal';
-import { getLoggedInUser } from '../../services/localStorage';
+import { CreatePost } from '@/components/Modal/CreatePost';
+import { getLoggedInUser, deletePostById } from '../../services/localStorage';
 
 // example of an import for utils to getPosts
 // import { getPosts, deletePost, editPost } from '@/utils/PostUtils'; 
@@ -23,9 +24,11 @@ const PostHome = ({
   image = null,
   description = "",
   instructions = [],
+  ingredients = [],
   comments = null,
   liked = false,
   initialLikes = 0,
+  onPostUpdated = null,
 }) => {
   const initialPost = {
     id,
@@ -34,7 +37,8 @@ const PostHome = ({
     timestamp,
     caption,
     image,
-    description,
+    recipeDescription: description,
+    ingredients,
     instructions,
     comments: comments || [],
     liked: liked ?? false,
@@ -61,6 +65,7 @@ const PostHome = ({
   const [showMenu, setShowMenu] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   // const [liked, setLiked] = useState(false);
   // const [likes, setLikes] = useState(initialLikes);
@@ -99,16 +104,36 @@ const PostHome = ({
     setShowDeleteModal(true);
   };
 
+  const handleEditClick = () => {
+    setShowMenu(false);
+    setShowEditModal(true);
+  };
+
   const handleShareClick = () => {
     setShowMenu(false);
     setShowShareModal(true);
   };
 
+  const handleEditClose = () => {
+    setShowEditModal(false);
+    // Trigger refresh if callback is provided
+    if (onPostUpdated) {
+      onPostUpdated();
+    }
+  };
+
   const handleConfirmDelete = () => {
-    console.log('Post deleted');
-    // Here you would call your delete function, e.g.:
-    // deletePost(postId);
+    deletePostById(id);
+    console.log('Post deleted', id);
     setShowDeleteModal(false);
+    
+    // Trigger refresh if callback is provided
+    if (onPostUpdated) {
+      onPostUpdated();
+    } else if (window) {
+      // Fallback to page reload if no callback
+      window.location.reload();
+    }
   };
 
   return (
@@ -131,7 +156,7 @@ const PostHome = ({
           </button>
           {showMenu && (
             <div className="menu-dropdown">
-              <button>Edit</button>
+              <button onClick={handleEditClick}>Edit</button>
               <button onClick={handleDeleteClick}>Delete</button>
               <button onClick={handleShareClick}>Share</button>
             </div>
@@ -202,6 +227,13 @@ const PostHome = ({
       <ShareModal
         visible={showShareModal}
         onClose={() => setShowShareModal(false)}
+      />
+
+      {/* Edit Modal */}
+      <CreatePost
+        visible={showEditModal}
+        onClose={handleEditClose}
+        postToEdit={post}
       />
     </div>
   );

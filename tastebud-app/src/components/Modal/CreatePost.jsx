@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CreatePost.css'; 
 import picIcon from './modal-icons/pic.png';
 import utencilIcon from './modal-icons/utencil.png';
 import plusIcon from './modal-icons/plus.png';
-import { savePostToDB, getLoggedInUser } from '@/services/localStorage';
+import { savePostToDB, getLoggedInUser, editPost } from '@/services/localStorage';
 import { v4 as uuidv4 } from 'uuid';
 
 
-export const CreatePost = ({ visible, onClose }) => {
+export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
   const [postTitle, setPostTitle] = useState('');
   const [caption, setCaption] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
@@ -16,6 +16,35 @@ export const CreatePost = ({ visible, onClose }) => {
   const [recipeDescription, setRecipeDescription] = useState('');
   const [ingredients, setIngredients] = useState(['', '']);
   const [instructions, setInstructions] = useState(['', '', '']);
+  const [isEditing, setIsEditing] = useState(false);
+  const [postId, setPostId] = useState(null);
+
+  // Load post data if editing
+  useEffect(() => {
+    if (postToEdit) {
+      setPostTitle(postToEdit.title || '');
+      setCaption(postToEdit.caption || '');
+      setSelectedImage(postToEdit.image || null);
+      setRecipeDescription(postToEdit.recipeDescription || '');
+      
+      // Set ingredients
+      if (postToEdit.ingredients && postToEdit.ingredients.length > 0) {
+        setIngredients(postToEdit.ingredients);
+        setShowRecipe(true);
+      }
+      
+      // Set instructions
+      if (postToEdit.instructions && postToEdit.instructions.length > 0) {
+        setInstructions(postToEdit.instructions);
+        setShowRecipe(true);
+      }
+      
+      setIsEditing(true);
+      setPostId(postToEdit.id);
+    } else {
+      clearModal();
+    }
+  }, [postToEdit]);
 
   const handleSelectImage = (event) => {
     const file = event.target.files[0];
@@ -34,6 +63,8 @@ export const CreatePost = ({ visible, onClose }) => {
     setRecipeDescription('');
     setIngredients(['', '']);
     setInstructions(['', '', '']);
+    setIsEditing(false);
+    setPostId(null);
   }
 
   const handleSaveAsDraft = () => {
@@ -51,14 +82,16 @@ export const CreatePost = ({ visible, onClose }) => {
 
   const handleSave = () => {
     const loggedInUser = getLoggedInUser();
-    const timestamp = new Date().toLocaleString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true,
-    });
+    const timestamp = isEditing ? 
+      postToEdit.timestamp : 
+      new Date().toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true,
+      });
     console.log(loggedInUser)
     const curr_user = {
       user_id: loggedInUser.id,
@@ -71,8 +104,8 @@ export const CreatePost = ({ visible, onClose }) => {
     const filteredInstructions = instructions.filter(item => item.trim() !== '');
     
     const newPost = {
-      id: uuidv4(),
-      user: curr_user,
+      id: isEditing ? postId : uuidv4(),
+      user: isEditing ? postToEdit.user : curr_user,
       title: postTitle,
       caption: caption,
       timestamp: timestamp,
@@ -80,12 +113,20 @@ export const CreatePost = ({ visible, onClose }) => {
       recipeDescription: recipeDescription,
       ingredients: filteredIngredients,
       instructions: filteredInstructions,
-      comments: [],
-      initialLikes: 0
-    };
+      comments: isEditing ? postToEdit.comments : [],
+      initialLikes: isEditing ? postToEdit.initialLikes : 0,
+      likes: isEditing ? postToEdit.likes : 0,
+      liked: isEditing ? postToEdit.liked : false
+    };  
 
-    savePostToDB(newPost);
-    console.log('Post saved', newPost);
+    if (isEditing) {
+      editPost(newPost);
+      console.log('Post updated', newPost);
+    } else {
+      savePostToDB(newPost);
+      console.log('Post saved', newPost);
+    }
+    
     onClose();
     clearModal();
   };
@@ -145,7 +186,7 @@ export const CreatePost = ({ visible, onClose }) => {
         </div>
         
         <div className="modal-header">
-          <h2>New Post</h2>
+          <h2>{isEditing ? 'Edit Post' : 'New Post'}</h2>
         </div>
         
         <div className="modal-scrollable-content">
