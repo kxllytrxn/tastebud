@@ -1,5 +1,6 @@
 import React from 'react';
 import './PeopleYouMayKnow.css';
+import profile from '@/assets/icons/profile-black-outline.png'
 
 const names = [
   "Etai Doe", "Emily Doe", "Lauren Doe", "Kelly Doe",
@@ -8,11 +9,15 @@ const names = [
 
 const PeopleYouMayKnow = () => {
   return (
-    <div className="card">
-      <h3 className="sidebar-header">People you may know:</h3>
+    <div className="people-card">
+      <div className="header-bar"></div>
+      <h3 className="sidebar-header">People you may know</h3>
       <ul className="sidebar-list">
         {names.map((name) => (
-          <li key={name}>👤 {name}</li>
+          <li key={name} className="person-entry"> 
+            <img src={profile} alt="Default Profile Photo" className="profile-pic" />
+            <span>{name}</span>
+          </li>
         ))}
       </ul>
     </div>

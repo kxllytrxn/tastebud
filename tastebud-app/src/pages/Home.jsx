@@ -3,14 +3,14 @@ import PostHome from '@/components/Post/PostHome';
 import SideBarUser from '@/components/SideBarUser/SideBarUser.jsx';
 import IconButton from '@/components/Button/IconButton';
 import { getAllUsers, getAllPosts, getLoggedInUser } from '@/services/localStorage';
-import ManageInfo from '@/components/ManageInfo/ManageInfo';
+import ManageAccount from '@/components/ManageAccount/ManageAccount';
 import PeopleYouMayKnow from '@/components/PeopleYouMayKnow/PeopleYouMayKnow';
 import '@/main.css';
 import { CreatePost } from '@/components/Modal/CreatePost';
 
 const RightSidebar = () => (
   <div className="sidebar">
-    <ManageInfo />
+    <ManageAccount />
     <PeopleYouMayKnow />
   </div>
 );
