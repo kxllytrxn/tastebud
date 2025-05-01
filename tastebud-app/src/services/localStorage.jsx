@@ -19,7 +19,6 @@ export const logout = () => {
 
 export const getLoggedInUser = () => {
   const userJSON = localStorage.getItem(LOGGED_IN_USER_KEY);
-  console.log(userJSON);
   const data = JSON.parse(userJSON);
   data.profile_photo_url = "https://static.wikia.nocookie.net/pokemon-brasil/images/5/53/Evolution.png/revision/latest?cb=20130619021157&path-prefix=pt-br"
   return data ? data : null;

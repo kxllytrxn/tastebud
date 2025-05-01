@@ -1,29 +1,49 @@
 import React from 'react';
 import PostProfile from '@/components/Post/PostProfile';
-import SideBarUser from '@/components/SideBarUser/SideBarUser.jsx';
 import IconButton from '@/components/Button/IconButton';
-
+import SideBarUser from '../components/SideBarUser/SideBarUser';
+import ProfileBanner from '@/components/ProfileBanner/ProfileBanner';
+import PeopleYouMayKnow from '@/components/PeopleYouMayKnow/PeopleYouMayKnow';
 import '@/main.css';
+import { getAllPosts, getLoggedInUser } from '../services/localStorage';
+import TastebudStats from '@/components/TastebudStats/TastebudStats';
+
+const RightSidebar = () => (
+  <div className="sidebar">
+    <PeopleYouMayKnow />
+  </div>
+);
 
 const UserProfile = () => {
-    
-    return (
-      <div className="container">
-            <main>
-              <PostProfile 
-                image="https://assets.epicurious.com/photos/5f32b611f1722a2c13407e4e/1:1/w_2560%2Cc_limit/miso-glazed-salmon-recipe-BA-081120.jpg" 
-                comments={[{ name: "James Doe", text: "Looks great!" }, { name: "Jane Doe", text: "Slay :)" }]}
-                instructions={[
-                  "Cook the rice",
-                  "Season the salmon",
-                  "Pan-fry for 3 minutes each side",
-                  "Serve with soy sauce",
-                ]}
-                currPage="userPage"
-              />
-            </main>
+  const loggedInUser = getLoggedInUser();
+  console.log("loggedInUser: ", loggedInUser)
+  const userPosts = getAllPosts().filter((post => post.user.user_id === loggedInUser.id))
+  console.log(userPosts)
+  return (
+    <div className="user-container"> 
+      <ProfileBanner user={loggedInUser} />
+      <div className="main-content">
+        
+        <div className="activity-section">
+          <TastebudStats 
+            mealsCooked={8} 
+            weekStreak={5} 
+            totalLikes={130} 
+          />
+        
+          <div className="activity-header">
+            <h3>My Activity</h3>
+            <button className="see-all-btn">See all posts ⌄</button>
           </div>
-    )
+          {userPosts.map((post) => (
+            <PostProfile key={post.id} {...post} />
+          ))}
+        </div>
+        <RightSidebar />
+
+      </div>
+    </div>
+  );
   }
   
   export default UserProfile;

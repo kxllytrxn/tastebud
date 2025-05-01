@@ -44,10 +44,13 @@ export const CreatePost = ({ visible, onClose }) => {
       minute: 'numeric',
       hour12: true,
     });
+    console.log(loggedInUser)
     const curr_user = {
+      user_id: loggedInUser.id,
       name: loggedInUser.display_name,
-      avatar: loggedInUser.avatar, 
+      avatar: loggedInUser.profile_photo_url, 
     };
+    console.log(curr_user)
     const newPost = {
       id: uuidv4(),
       user: curr_user,
@@ -60,6 +63,7 @@ export const CreatePost = ({ visible, onClose }) => {
       comments: [],
       initialLikes: 0
     };  
+
     savePostToDB(newPost);
     console.log('Post saved', newPost);
     onClose();

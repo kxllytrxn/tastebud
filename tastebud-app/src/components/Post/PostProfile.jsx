@@ -8,17 +8,22 @@ import Comment from "@/components/Comment/Comment";
 // import { getPosts, deletePost, editPost } from '@/utils/PostUtils'; 
 
 // here postId is a single argument, but we can add more!
-const Post = ({
-    user = { name: "John Doe", avatar: "https://images.squarespace-cdn.com/content/v1/598a797af5e23155afc4d592/1597998089824-UHZER996H8NB5EYYDFIW/AVI.JPG?format=2500w" },
-  title = "Salmon and Rice",
-  timestamp = "March 8, 2025",
-  caption = "Made dinner with @Jane Doe",
+const PostProfile = ({
+  user = { 
+    user_id: 0,
+    name: "",
+    avatar: "" 
+  },
+  title = "",
+  timestamp = "",
+  caption = "",
   image = null,
-  description = "Miso glazed Salmon with rice",
+  description = "",
   instructions = [],
   comments = null,
   initialLikes = 0,
 }) => {
+  
   const [showMenu, setShowMenu] = useState(false);
 
   const [liked, setLiked] = useState(false);
@@ -124,4 +129,4 @@ const Post = ({
     );
     };
 
-export default Post;
+export default PostProfile;

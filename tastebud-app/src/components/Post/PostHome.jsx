@@ -5,14 +5,18 @@ import RecipeInstruction from "@/components/RecipeInstruction/RecipeInstruction"
 import Comment from "@/components/Comment/Comment";
 import { DeleteModal } from '@/components/Modal/DeleteModal';
 import { ShareModal } from '@/components/Modal/ShareModal';
+import { getLoggedInUser } from '../../services/localStorage';
 
 // example of an import for utils to getPosts
 // import { getPosts, deletePost, editPost } from '@/utils/PostUtils'; 
 
 // here postId is a single argument, but we can add more!
-const Post = ({
-  user = { name: "John Doe", avatar: "https://images.squarespace-cdn.com/content/v1/598a797af5e23155afc4d592/1597998089824-UHZER996H8NB5EYYDFIW/AVI.JPG?format=2500w" },
-  title = "Salmon and Rice",
+const PostHome = ({
+  post_id = "",
+  user = { 
+    name: "John Doe", 
+    avatar: "https://images.squarespace-cdn.com/content/v1/598a797af5e23155afc4d592/1597998089824-UHZER996H8NB5EYYDFIW/AVI.JPG?format=2500w" },
+  title = "",
   timestamp = new Date(),
   caption = "",
   image = null,
@@ -37,6 +41,8 @@ const Post = ({
     setLiked(!liked);
   };
   const fakeUser = 'https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/11688145/pokemon_piplup.png?quality=90&strip=all&crop=0,3.4685863874346,100,93.062827225131'
+  const curr_user = getLoggedInUser();
+  console.log(curr_user)
 
 
   const [newComment, setNewComment] = useState("");
@@ -45,7 +51,7 @@ const Post = ({
 
   const handleAddComment = () => {
     if (newComment.trim() === "") return;
-    const newEntry = { name: user.name, text: newComment, avatar: user.avatar };
+    const newEntry = { name: curr_user.display_name, text: newComment, avatar: curr_user.profile_photo_url };
     setAllComments([...allComments, newEntry]);
     setNewComment("");
   };
@@ -163,5 +169,5 @@ const Post = ({
   );
 };
 
-export default Post;
+export default PostHome;
 

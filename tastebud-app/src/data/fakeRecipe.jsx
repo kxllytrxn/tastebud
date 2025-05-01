@@ -1,6 +1,6 @@
 const defaultUser = {
   name: "James Smith",
-  avatar: "https://images.squarespace-cdn.com/content/v1/598a797af5e23155afc4d592/1597998089824-UHZER996H8NB5EYYDFIW/AVI.JPG?format=2500w"
+  profile_: "https://images.squarespace-cdn.com/content/v1/598a797af5e23155afc4d592/1597998089824-UHZER996H8NB5EYYDFIW/AVI.JPG?format=2500w"
 };
 
 const fakeUser2 = {
