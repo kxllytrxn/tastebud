@@ -11,10 +11,11 @@ import { getLoggedInUser } from '../../services/localStorage';
 // import { getPosts, deletePost, editPost } from '@/utils/PostUtils'; 
 
 // here postId is a single argument, but we can add more!
-const Post = ({
+
+const PostProfile = ({
   id,
   user = { name: "John Doe", avatar: "https://images.squarespace-cdn.com/content/v1/598a797af5e23155afc4d592/1597998089824-UHZER996H8NB5EYYDFIW/AVI.JPG?format=2500w" },
-  title = "Salmon and Rice",
+  title = "",
   timestamp = new Date(),
   caption = "",
   image = null,
@@ -24,6 +25,7 @@ const Post = ({
   liked = false,
   initialLikes = 0,
 }) => {
+
   const initialPost = {
     id,
     user,
@@ -204,4 +206,4 @@ const Post = ({
   );
 };
 
-export default Post;
+export default PostProfile;

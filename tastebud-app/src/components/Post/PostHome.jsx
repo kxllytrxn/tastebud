@@ -11,10 +11,13 @@ import { getLoggedInUser } from '../../services/localStorage';
 // import { getPosts, deletePost, editPost } from '@/utils/PostUtils'; 
 
 // here postId is a single argument, but we can add more!
-const Post = ({
+
+const PostHome = ({
   id,
-  user = { name: "John Doe", avatar: "https://images.squarespace-cdn.com/content/v1/598a797af5e23155afc4d592/1597998089824-UHZER996H8NB5EYYDFIW/AVI.JPG?format=2500w" },
-  title = "Salmon and Rice",
+  user = { 
+    name: "John Doe", 
+    avatar: "https://images.squarespace-cdn.com/content/v1/598a797af5e23155afc4d592/1597998089824-UHZER996H8NB5EYYDFIW/AVI.JPG?format=2500w" },
+  title = "",
   timestamp = new Date(),
   caption = "",
   image = null,
@@ -73,16 +76,16 @@ const Post = ({
       liked: newLiked,
     }));
   };
-
+  const fakeUser = 'https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/11688145/pokemon_piplup.png?quality=90&strip=all&crop=0,3.4685863874346,100,93.062827225131'
   const [newComment, setNewComment] = useState("");
   // const [allComments, setAllComments] = useState(comments || []);
   const commentInputRef = useRef(null);
 
   const handleAddComment = () => {
     if (newComment.trim() === "") return;
+
     const newEntry = { name: currUser.display_name, text: newComment, avatar: currUser.profile_photo_url};
     const updatedComments = [...post.comments, newEntry];
-
 
     setPost(prev => ({
       ...prev,
@@ -114,7 +117,7 @@ const Post = ({
       <div className="post-header-bar"></div>
       <div className="post-header">
         <div className="avatar">
-          <img src={user.avatar} alt={`${user.name}'s avatar`} />
+          <img src={user.avatar ? user.avatar : fakeUser} alt={`${user.name}'s avatar`} />
         </div>
         <div className="post-header-info">
           <div className="username">{user.name}</div>
@@ -204,5 +207,5 @@ const Post = ({
   );
 };
 
-export default Post;
+export default PostHome;
 

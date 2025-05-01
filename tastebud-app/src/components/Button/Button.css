@@ -26,7 +26,7 @@
 
 .orange.secondary:hover {
     background-color: var(--orange-opacity);
-    color: white;
+    color: var(--green);
 }
 
 .green.primary {
