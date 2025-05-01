@@ -5,7 +5,7 @@ import RecipeInstruction from "@/components/RecipeInstruction/RecipeInstruction"
 import Comment from "@/components/Comment/Comment";
 import { DeleteModal } from '@/components/Modal/DeleteModal';
 import { ShareModal } from '@/components/Modal/ShareModal';
-import { getLoggedInUser } from '../../services/localStorage';
+import { getLoggedInUser, deletePostById } from '../../services/localStorage';
 
 // example of an import for utils to getPosts
 // import { getPosts, deletePost, editPost } from '@/utils/PostUtils'; 
@@ -104,10 +104,14 @@ const PostProfile = ({
   };
 
   const handleConfirmDelete = () => {
-    console.log('Post deleted');
-    // Here you would call your delete function, e.g.:
-    // deletePost(postId);
+    deletePostById(id);
+    console.log('Post deleted', id);
     setShowDeleteModal(false);
+    
+    // Refresh the page to reflect the changes
+    if (window) {
+      window.location.reload();
+    }
   };
 
   return (

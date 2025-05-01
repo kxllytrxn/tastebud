@@ -18,6 +18,7 @@ export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
   const [instructions, setInstructions] = useState(['', '', '']);
   const [isEditing, setIsEditing] = useState(false);
   const [postId, setPostId] = useState(null);
+  const [errors, setErrors] = useState({});
 
   // Load post data if editing
   useEffect(() => {
@@ -51,6 +52,10 @@ export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setSelectedImage(imageUrl);
+      // Clear any existing image error when an image is selected
+      if (errors.image) {
+        setErrors({ ...errors, image: null });
+      }
     }
   };
 
@@ -65,6 +70,7 @@ export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
     setInstructions(['', '', '']);
     setIsEditing(false);
     setPostId(null);
+    setErrors({});
   }
 
   const handleSaveAsDraft = () => {
@@ -80,7 +86,31 @@ export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
     });
   };
 
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (!postTitle.trim()) {
+      newErrors.title = "Post title is required";
+    }
+    
+    if (!caption.trim()) {
+      newErrors.caption = "Caption is required";
+    }
+    
+    if (!selectedImage) {
+      newErrors.image = "Please upload a photo";
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSave = () => {
+    // Validate the form before saving
+    if (!validateForm()) {
+      return; // Stop if validation fails
+    }
+    
     const loggedInUser = getLoggedInUser();
     const timestamp = isEditing ? 
       postToEdit.timestamp : 
@@ -192,7 +222,7 @@ export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
         <div className="modal-scrollable-content">
           <div className="field-container">
             <div className="field-left">
-              <div className="field-label">Post Title</div>
+              <div className="field-label">Post Title<span className="required">*</span></div>
               <div className="field-subtitle">Give your meal a title</div>
             </div>
             <div className="field-right">
@@ -200,9 +230,15 @@ export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
                 type="text" 
                 placeholder="e.g. Salmon and Rice" 
                 value={postTitle}
-                onChange={(e) => setPostTitle(e.target.value)}
-                className="input"
+                onChange={(e) => {
+                  setPostTitle(e.target.value);
+                  if (errors.title && e.target.value.trim()) {
+                    setErrors({ ...errors, title: null });
+                  }
+                }}
+                className={`input ${errors.title ? 'input-error' : ''}`}
               />
+              {errors.title && <div className="error-message">{errors.title}</div>}
             </div>
           </div>
           
@@ -210,16 +246,22 @@ export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
           
           <div className="field-container">
             <div className="field-left">
-              <div className="field-label">Caption</div>
+              <div className="field-label">Caption<span className="required">*</span></div>
               <div className="field-subtitle">Give a behind-the-scenes or tag your friends</div>
             </div>
             <div className="field-right">
               <textarea 
                 placeholder="e.g. Made some salmon + rice for dinner :) — With @Jane Doe"
                 value={caption}
-                onChange={(e) => setCaption(e.target.value)}
-                className="input caption-input"
+                onChange={(e) => {
+                  setCaption(e.target.value);
+                  if (errors.caption && e.target.value.trim()) {
+                    setErrors({ ...errors, caption: null });
+                  }
+                }}
+                className={`input caption-input ${errors.caption ? 'input-error' : ''}`}
               ></textarea>
+              {errors.caption && <div className="error-message">{errors.caption}</div>}
             </div>
           </div>
           
@@ -227,17 +269,20 @@ export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
           
           <div className="field-container">
             <div className="field-left">
-              <div className="field-label">Photo</div>
+              <div className="field-label">Photo<span className="required">*</span></div>
               <div className="field-subtitle">Show off your creation</div>
             </div>
             <div className="field-right">
               {selectedImage ? (
                 <div className="photo-preview">
                   <img src={selectedImage} alt="Preview" className="preview-image" />
-                  <button className="remove-image" onClick={() => setSelectedImage(null)}>Remove</button>
+                  <button className="remove-image" onClick={() => {
+                    setSelectedImage(null);
+                    setErrors({ ...errors, image: "Please upload a photo" });
+                  }}>Remove</button>
                 </div>
               ) : (
-                <div className="image-selector">
+                <div className={`image-selector ${errors.image ? 'image-selector-error' : ''}`}>
                   <div className="image-placeholder">
                     <span className="icon">📷</span>
                     <p>Drag photos here or</p>
@@ -253,6 +298,7 @@ export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
                   </div>
                 </div>
               )}
+              {errors.image && <div className="error-message">{errors.image}</div>}
             </div>
           </div>
 
@@ -367,11 +413,15 @@ export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
           </div>
           <div className="footer-right">
             <button className="draft-button" onClick={handleSaveAsDraft}>Save as draft</button>
-            <button className="save-button" onClick={handleSave}>Save</button>
+            <button className="save-button" onClick={handleSave}>Post</button>
           </div>
           
           {lastSaved && (
             <div className="timestamp">draft last saved at {formatTime(lastSaved)}</div>
+          )}
+          
+          {Object.keys(errors).length > 0 && (
+            <div className="form-error-summary">Please fill out all required fields marked with *</div>
           )}
         </div>
       </div>

@@ -8,11 +8,6 @@ import { ShareModal } from '@/components/Modal/ShareModal';
 import { CreatePost } from '@/components/Modal/CreatePost';
 import { getLoggedInUser, deletePostById } from '../../services/localStorage';
 
-// example of an import for utils to getPosts
-// import { getPosts, deletePost, editPost } from '@/utils/PostUtils'; 
-
-// here postId is a single argument, but we can add more!
-
 const PostHome = ({
   id,
   user = { 
