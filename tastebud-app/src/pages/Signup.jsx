@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signup } from '@/utils/auth'; 
+import Button from '@/components/Button/Button';
 import './styles/Login.css';
 
 const Signup = () => {
@@ -46,7 +47,7 @@ const Signup = () => {
             required
           />
         </div><div className="form-group">
-          <label htmlFor="username">First Name</label>
+          <label htmlFor="username">Last Name</label>
           <input
             type="text"
             id="last_name"
@@ -65,7 +66,13 @@ const Signup = () => {
             required
           />
         </div>
-        <button type="submit" className="btn-signup">Sign Up</button>
+        <Button 
+          buttonText="Sign Up"
+          onClick={handleSubmit}
+          variant = "secondary"
+          color = "green"
+        />
+        {/* <button type="submit" className="btn-signup">Sign Up</button> */}
       </form>
       <div className="login-link">
         <p>Already have an account? <a href="/login">Login</a></p>
