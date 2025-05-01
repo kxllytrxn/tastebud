@@ -60,6 +60,7 @@ const Home = () => {
         {sortedPosts ? (
           sortedPosts.map((post) => (
             <PostHome key={post.id}
+              id={post.id}
               user={post.user}
               timestamp={post.timestamp}
               caption={post.caption}
@@ -67,6 +68,7 @@ const Home = () => {
               image={post.image} 
               comments={post.comments}
               instructions={post.instructions}
+              liked={post.liked}
               initialLikes={post.initialLikes}
             />
           ))) : (<p>No posts yet. Start by creating one!</p>)
