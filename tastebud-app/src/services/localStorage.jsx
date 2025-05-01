@@ -20,7 +20,7 @@ export const logout = () => {
 export const getLoggedInUser = () => {
   const userJSON = localStorage.getItem(LOGGED_IN_USER_KEY);
   const data = JSON.parse(userJSON);
-  data.profile_photo_url = "https://static.wikia.nocookie.net/pokemon-brasil/images/5/53/Evolution.png/revision/latest?cb=20130619021157&path-prefix=pt-br"
+  data.profile_photo_url = "https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/11688145/pokemon_piplup.png?quality=90&strip=all&crop=0,3.4685863874346,100,93.062827225131"
   return data ? data : null;
 };
 

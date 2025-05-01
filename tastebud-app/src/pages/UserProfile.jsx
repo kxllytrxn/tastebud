@@ -1,7 +1,5 @@
 import React from 'react';
 import PostProfile from '@/components/Post/PostProfile';
-import IconButton from '@/components/Button/IconButton';
-import SideBarUser from '../components/SideBarUser/SideBarUser';
 import ProfileBanner from '@/components/ProfileBanner/ProfileBanner';
 import PeopleYouMayKnow from '@/components/PeopleYouMayKnow/PeopleYouMayKnow';
 import '@/main.css';
@@ -16,12 +14,13 @@ const RightSidebar = () => (
 
 const UserProfile = () => {
   const loggedInUser = getLoggedInUser();
-  console.log("loggedInUser: ", loggedInUser)
   const userPosts = getAllPosts().filter((post => post.user.user_id === loggedInUser.id))
   console.log(userPosts)
   return (
     <div className="user-container"> 
-      <ProfileBanner user={loggedInUser} />
+      <ProfileBanner 
+        user={loggedInUser} 
+        avatar={loggedInUser.profile_photo_url}/>
       <div className="main-content">
         
         <div className="activity-section">
@@ -35,9 +34,13 @@ const UserProfile = () => {
             <h3>My Activity</h3>
             <button className="see-all-btn">See all posts ⌄</button>
           </div>
-          {userPosts.map((post) => (
-            <PostProfile key={post.id} {...post} />
-          ))}
+          {userPosts.length > 0 ? 
+            (userPosts.map((post) => (
+              <PostProfile key={post.id} {...post} />
+            ))) :
+            <p> No posts found. Create one today! </p>
+          }
+          
         </div>
         <RightSidebar />
 
