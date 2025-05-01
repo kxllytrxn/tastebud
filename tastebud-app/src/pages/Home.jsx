@@ -3,14 +3,14 @@ import PostHome from '@/components/Post/PostHome';
 import SideBarUser from '@/components/SideBarUser/SideBarUser.jsx';
 import IconButton from '@/components/Button/IconButton';
 import { getAllUsers, getAllPosts, getLoggedInUser } from '@/services/localStorage';
-import ManageInfo from '@/components/ManageInfo/ManageInfo';
+import ManageAccount from '@/components/ManageAccount/ManageAccount';
 import PeopleYouMayKnow from '@/components/PeopleYouMayKnow/PeopleYouMayKnow';
 import '@/main.css';
 import { CreatePost } from '@/components/Modal/CreatePost';
 
 const RightSidebar = () => (
   <div className="sidebar">
-    <ManageInfo />
+    <ManageAccount />
     <PeopleYouMayKnow />
   </div>
 );
@@ -56,6 +56,7 @@ const Home = () => {
         {sortedPosts.length > 0 ? (
           sortedPosts.map((post) => (
             <PostHome key={post.id}
+              id={post.id}
               user={post.user}
               timestamp={post.timestamp}
               caption={post.caption}
@@ -63,6 +64,7 @@ const Home = () => {
               image={post.image} 
               comments={post.comments}
               instructions={post.instructions}
+              liked={post.liked}
               initialLikes={post.initialLikes}
             />
           ))) : (<p>No posts yet. Start by creating one!</p>)

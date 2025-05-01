@@ -11,8 +11,9 @@ import { getLoggedInUser } from '../../services/localStorage';
 // import { getPosts, deletePost, editPost } from '@/utils/PostUtils'; 
 
 // here postId is a single argument, but we can add more!
+
 const PostHome = ({
-  post_id = "",
+  id,
   user = { 
     name: "John Doe", 
     avatar: "https://images.squarespace-cdn.com/content/v1/598a797af5e23155afc4d592/1597998089824-UHZER996H8NB5EYYDFIW/AVI.JPG?format=2500w" },
@@ -23,36 +24,73 @@ const PostHome = ({
   description = "",
   instructions = [],
   comments = null,
+  liked = false,
   initialLikes = 0,
 }) => {
+  const initialPost = {
+    id,
+    user,
+    title,
+    timestamp,
+    caption,
+    image,
+    description,
+    instructions,
+    comments: comments || [],
+    liked: liked ?? false,
+    likes: initialLikes,
+  };
+
+  const currUser = getLoggedInUser()
+
+  // populate initial post
+  const [post, setPost] = useState(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(`${id}`));
+      return saved && saved.user ? saved : initialPost;
+    } catch (e) {
+      return initialPost;
+    }
+  });
+
+  // updates when something changes
+  useEffect(() => {
+    localStorage.setItem(`${id}`, JSON.stringify(post));
+  }, [post, id]);
+
   const [showMenu, setShowMenu] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
 
-  const [liked, setLiked] = useState(false);
-  const [likes, setLikes] = useState(initialLikes);
+  // const [liked, setLiked] = useState(false);
+  // const [likes, setLikes] = useState(initialLikes);
 
+  // action when liked button is clicked
   const toggleLike = () => {
-    if (liked) {
-      setLikes(likes - 1);
-    } else {
-      setLikes(likes + 1);
-    }
-    setLiked(!liked);
+    const newLiked = !post.liked;
+    const newLikes = newLiked ? post.likes + 1 : post.likes - 1;
+
+    setPost(prev => ({
+      ...prev,
+      likes: newLikes,
+      liked: newLiked,
+    }));
   };
   const fakeUser = 'https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/11688145/pokemon_piplup.png?quality=90&strip=all&crop=0,3.4685863874346,100,93.062827225131'
-  const curr_user = getLoggedInUser();
-  console.log(curr_user)
-
-
   const [newComment, setNewComment] = useState("");
-  const [allComments, setAllComments] = useState(comments || []);
+  // const [allComments, setAllComments] = useState(comments || []);
   const commentInputRef = useRef(null);
 
   const handleAddComment = () => {
     if (newComment.trim() === "") return;
-    const newEntry = { name: curr_user.display_name, text: newComment, avatar: curr_user.profile_photo_url };
-    setAllComments([...allComments, newEntry]);
+
+    const newEntry = { name: currUser.display_name, text: newComment, avatar: currUser.profile_photo_url};
+    const updatedComments = [...post.comments, newEntry];
+
+    setPost(prev => ({
+      ...prev,
+      comments: updatedComments,
+    }));
     setNewComment("");
   };
 
@@ -79,7 +117,7 @@ const PostHome = ({
       <div className="post-header-bar"></div>
       <div className="post-header">
         <div className="avatar">
-          <img src={fakeUser} alt={`${user.name}'s avatar`} />
+          <img src={user.avatar ? user.avatar : fakeUser} alt={`${user.name}'s avatar`} />
         </div>
         <div className="post-header-info">
           <div className="username">{user.name}</div>
@@ -121,7 +159,7 @@ const PostHome = ({
 
       {/* Actions */}
       <div className="card-footer icon-buttons-container">
-        <IconButton icon={liked ? "❤️" : "🤍"} onClick={toggleLike} />
+        <IconButton icon={post.liked ? "❤️" : "🤍"} onClick={toggleLike} />
         <IconButton
           icon="💬"
           onClick={() => commentInputRef.current?.focus()}
@@ -131,12 +169,12 @@ const PostHome = ({
 
       {/* Like and Comment Count */}
       <div className="post-stats">
-        <span>❤️ {likes} likes</span>
-        <span>💬 {allComments.length} comments</span>
+        <span>❤️ {post.likes} likes</span>
+        <span>💬 {post.comments.length} comments</span>
       </div>
 
       {/* Comment */}
-      {allComments.map((c, i) => (
+      {post.comments.map((c, i) => (
         <Comment key={i} name={c.name} text={c.text} avatar={c.avatar} />
       ))}
 

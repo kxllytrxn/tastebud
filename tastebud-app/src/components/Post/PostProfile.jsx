@@ -1,56 +1,119 @@
-import React, { useState, useEffect } from 'react';
-import "./PostProfile.css";
+import React, { useState, useEffect, useRef } from 'react';
+import "./PostHome.css";
 import IconButton from '@/components/Button/IconButton';
 import RecipeInstruction from "@/components/RecipeInstruction/RecipeInstruction";
 import Comment from "@/components/Comment/Comment";
+import { DeleteModal } from '@/components/Modal/DeleteModal';
+import { ShareModal } from '@/components/Modal/ShareModal';
+import { getLoggedInUser } from '../../services/localStorage';
 
 // example of an import for utils to getPosts
 // import { getPosts, deletePost, editPost } from '@/utils/PostUtils'; 
 
 // here postId is a single argument, but we can add more!
+
 const PostProfile = ({
-  user = { 
-    user_id: 0,
-    name: "",
-    avatar: "" 
-  },
+  id,
+  user = { name: "John Doe", avatar: "https://images.squarespace-cdn.com/content/v1/598a797af5e23155afc4d592/1597998089824-UHZER996H8NB5EYYDFIW/AVI.JPG?format=2500w" },
   title = "",
-  timestamp = "",
+  timestamp = new Date(),
   caption = "",
   image = null,
   description = "",
   instructions = [],
   comments = null,
+  liked = false,
   initialLikes = 0,
 }) => {
-  
-  const [showMenu, setShowMenu] = useState(false);
 
-  const [liked, setLiked] = useState(false);
-  const [likes, setLikes] = useState(initialLikes);
+  const initialPost = {
+    id,
+    user,
+    title,
+    timestamp,
+    caption,
+    image,
+    description,
+    instructions,
+    comments: comments || [],
+    liked: liked ?? false,
+    likes: initialLikes,
+  };
 
-  const toggleLike = () => {
-    if (liked) {
-      setLikes(likes - 1);
-    } else {
-      setLikes(likes + 1);
+  const currUser = getLoggedInUser()
+
+  // populate initial post
+  const [post, setPost] = useState(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(`${id}`));
+      return saved && saved.user ? saved : initialPost;
+    } catch (e) {
+      return initialPost;
     }
-    setLiked(!liked);
+  });
+
+  // updates when something changes
+  useEffect(() => {
+    localStorage.setItem(`${id}`, JSON.stringify(post));
+  }, [post, id]);
+
+  const [showMenu, setShowMenu] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
+
+  // const [liked, setLiked] = useState(false);
+  // const [likes, setLikes] = useState(initialLikes);
+
+  // action when liked button is clicked
+  const toggleLike = () => {
+    const newLiked = !post.liked;
+    const newLikes = newLiked ? post.likes + 1 : post.likes - 1;
+
+    setPost(prev => ({
+      ...prev,
+      likes: newLikes,
+      liked: newLiked,
+    }));
   };
 
   const [newComment, setNewComment] = useState("");
-  const [allComments, setAllComments] = useState(comments || []);
+  // const [allComments, setAllComments] = useState(comments || []);
+  const commentInputRef = useRef(null);
 
   const handleAddComment = () => {
     if (newComment.trim() === "") return;
-    const newEntry = { name: user.name, text: newComment };
-    setAllComments([...allComments, newEntry]);
+    const newEntry = { name: currUser.display_name, text: newComment, avatar: currUser.profile_photo_url };
+    const updatedComments = [...post.comments, newEntry];
+
+
+    setPost(prev => ({
+      ...prev,
+      comments: updatedComments,
+    }));
     setNewComment("");
+  };
+
+  const handleDeleteClick = () => {
+    setShowMenu(false);
+    setShowDeleteModal(true);
+  };
+
+  const handleShareClick = () => {
+    setShowMenu(false);
+    setShowShareModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    console.log('Post deleted');
+    // Here you would call your delete function, e.g.:
+    // deletePost(postId);
+    setShowDeleteModal(false);
   };
 
   return (
     <div className="card">
       {/* Header */}
+      <div className="post-header-bar"></div>
       <div className="post-header">
         <div className="avatar">
           <img src={user.avatar} alt={`${user.name}'s avatar`} />
@@ -60,7 +123,7 @@ const PostProfile = ({
           <div className="timestamp">{timestamp}</div>
         </div>
 
-        {/* ⋯ Options Menu */}
+        {/* Options Menu */}
         <div className="post-menu-container">
           <button className="menu-button" onClick={() => setShowMenu(!showMenu)}>
             ⋯
@@ -68,65 +131,79 @@ const PostProfile = ({
           {showMenu && (
             <div className="menu-dropdown">
               <button>Edit</button>
-              <button>Delete</button>
-              <button>Share</button>
+              <button onClick={handleDeleteClick}>Delete</button>
+              <button onClick={handleShareClick}>Share</button>
             </div>
           )}
         </div>
       </div>
 
-        {/* Title */}
-        <h2 className="post-card-title">{title}</h2>
+      {/* Title */}
+      <h2 className="post-card-title">{title}</h2>
 
-        {/* Caption */}
-        {caption && <p className="post-caption">{caption}</p>}
+      {/* Caption */}
+      {caption && <p className="post-caption">{caption}</p>}
 
-        {/* Image and Recipes */}
-          <div className="img-recipe">
-              {image && (
-                  <img
-                      src={image}
-                      alt="Post"
-                      className="post-card-img"
-                  />
-              )}
+      {/* Image */}
+      {image && (
+        <img
+          src={image}
+          alt="Post"
+          className="post-card-img"
+        />
+      )}
 
-              <div className="recipe-column">
-                  <RecipeInstruction instructions={instructions} />
-              </div>
-          </div>
+      {/* Recipe Preview */}
+      <RecipeInstruction instructions={instructions} />
 
-        {/* Actions */}
-        {/* <div className="card-footer icon-buttons-container">
-            <IconButton icon={liked ? "❤️" : "🤍"} onClick={toggleLike} />
-            <IconButton icon="💬" onClick={handleAddComment} />
-            <IconButton icon="🔗" onClick={() => console.log('Share clicked')} />
-        </div> */}
+      {/* Actions */}
+      <div className="card-footer icon-buttons-container">
+        <IconButton icon={post.liked ? "❤️" : "🤍"} onClick={toggleLike} />
+        <IconButton
+          icon="💬"
+          onClick={() => commentInputRef.current?.focus()}
+        />
+        <IconButton icon="🔗" onClick={handleShareClick} />
+      </div>
 
-        {/* Like and Comment Count */}
-        <div className="post-stats">
-            <span>❤️ {likes} likes</span>
-            <span>💬 {allComments.length} comments</span>
-        </div>
+      {/* Like and Comment Count */}
+      <div className="post-stats">
+        <span>❤️ {post.likes} likes</span>
+        <span>💬 {post.comments.length} comments</span>
+      </div>
 
-        {/* Comment */}
-        {/* {allComments.map((c, i) => (
-            <Comment key={i} name={c.name} text={c.text} />
-        ))} */}
+      {/* Comment */}
+      {post.comments.map((c, i) => (
+        <Comment key={i} name={c.name} text={c.text} avatar={c.avatar} />
+      ))}
 
-        {/* Add Comment */}
-        {/* <input
-            type="text"
-            placeholder="Add a comment..."
-            className="comment-input"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            onKeyDown={(e) => {
-            if (e.key === "Enter") handleAddComment();
-            }}
-        /> */}
-        </div>
-    );
-    };
+      {/* Add Comment */}
+      <input
+        type="text"
+        placeholder="Add a comment..."
+        className="comment-input"
+        ref={commentInputRef}
+        value={newComment}
+        onChange={(e) => setNewComment(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") handleAddComment();
+        }}
+      />
+
+      {/* Delete Modal */}
+      <DeleteModal
+        visible={showDeleteModal}
+        onClose={() => setShowDeleteModal(false)}
+        onConfirm={handleConfirmDelete}
+      />
+
+      {/* Share Modal */}
+      <ShareModal
+        visible={showShareModal}
+        onClose={() => setShowShareModal(false)}
+      />
+    </div>
+  );
+};
 
 export default PostProfile;
