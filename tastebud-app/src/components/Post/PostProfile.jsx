@@ -23,7 +23,7 @@ const PostProfile = ({
   instructions = [],
   comments = null,
   liked = false,
-  initialLikes = 0,
+  likes = 0,
 }) => {
 
   const initialPost = {
@@ -37,7 +37,7 @@ const PostProfile = ({
     instructions,
     comments: comments || [],
     liked: liked ?? false,
-    likes: initialLikes,
+    likes: likes,
   };
 
   const currUser = getLoggedInUser()
@@ -61,8 +61,6 @@ const PostProfile = ({
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
 
-  // const [liked, setLiked] = useState(false);
-  // const [likes, setLikes] = useState(initialLikes);
 
   // action when liked button is clicked
   const toggleLike = () => {

@@ -16,11 +16,11 @@ const RightSidebar = () => (
 );
 
 const Home = () => {
-  // const users = getAllUsers();
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     const storedPosts = getAllPosts();
     setPosts(storedPosts);
+    console.log(storedPosts)
   }, []); 
   const sortedPosts = [...posts].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 

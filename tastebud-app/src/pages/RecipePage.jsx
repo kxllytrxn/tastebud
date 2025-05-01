@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import SideBarUser from '@/components/SideBarUser/SideBarUser.jsx';
 import Button from "@/components/Button/Button.jsx";
@@ -9,28 +9,34 @@ import './styles/RecipePage.css'
 
 
 const RecipePage = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const { id } = useParams();
 
-    const { id } = useParams();
-    const users = getAllUsers();
-    // console.log(users)
-    const recipes = getAllPosts(); // this uses the UUIDs
-    console.log("default recipes: ", defaultRecipes)
-    console.log(recipes)
-    const recipe = recipes.find(r => r.id == (id));
-    console.log("RECIPE: ", recipe)
+  const [recipe, setRecipe] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const storedPosts = getAllPosts();
+    console.log(storedPosts)
+    const found = storedPosts.find((r) => r.id == (id));
+    setRecipe(found);
+    setLoading(false);
+  }, [id]);
+
+  if (loading) return <p>Loading recipe...</p>;
   if (!recipe) return <h2>Recipe not found</h2>;
+  console.log(recipe);
 
   return (
     <div className="indv-recipe-page">
-      <SideBarUser 
+      <SideBarUser
         name={"Kelly Tran"}
         followers={40}
         following={23}
         lastMealDate="Yesterday"
       />
       <div className="recipe-page-container">
-          <div className="back-button-wrapper">
+        <div className="back-button-wrapper">
           <Button
             buttonText="← Back to Recipes"
             onClick={() => navigate("/recipes")}
@@ -41,13 +47,13 @@ const RecipePage = () => {
         <div className="recipe-block">
           <div className="recipe-header-bar"></div>
 
-          <div className="recipe-header">
+          <div className="recipe-page-header">
             <h1>{recipe.title}</h1>
             <p className="recipe-meta">
-              By {recipe.user?.name} | ❤️ {recipe.initialLikes} likes | 💬 2 comments
+              By {recipe.user?.name} | ❤️ {recipe.likes} likes | 💬 {recipe.comments?.length || 0} comments
             </p>
             <p className="recipe-caption">
-              Made some salmon + rice for dinner :) — With <span className="mention">@Jane Doe</span>
+              {recipe.caption}
             </p>
           </div>
 
@@ -96,9 +102,9 @@ const RecipePage = () => {
             ) : (
               <div className="comment"> No comments found :( </div>
             )}
-            
+
           </div>
-      </div>
+        </div>
       </div>
     </div>
   );

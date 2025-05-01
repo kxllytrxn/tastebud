@@ -44,7 +44,7 @@ const defaultRecipes = [
       "Optional toppings: avocado, fresh cilantro, lime wedges, vegan sour cream"
     ],
     "comments": [],
-    "initialLikes": 0
+    "likes": 0
   },
   {
     "id": 1,
@@ -57,7 +57,7 @@ const defaultRecipes = [
     "instructions": [],
     "ingredients": [],
     "comments": [],
-    "initialLikes": 0
+    "likes": 0
   },
   {
     "id": 2,
@@ -76,7 +76,7 @@ const defaultRecipes = [
     ],
     "ingredients": ["salmon", "rice", "mushroom"],
     "comments": [],
-    "initialLikes": 0
+    "likes": 0
   },
   {
     "id": 3,
@@ -89,7 +89,7 @@ const defaultRecipes = [
     "instructions": [],
     "ingredients": [],
     "comments": [],
-    "initialLikes": 0
+    "likes": 0
   },
   {
     "id": 4,
@@ -102,7 +102,7 @@ const defaultRecipes = [
     "instructions": [],
     "ingredients": [],
     "comments": [],
-    "initialLikes": 0
+    "likes": 0
   },
   {
     "id": 5,
@@ -115,7 +115,7 @@ const defaultRecipes = [
     "instructions": [],
     "ingredients": [],
     "comments": [],
-    "initialLikes": 0
+    "likes": 0
   },
   {
     "id": 6,
@@ -128,7 +128,7 @@ const defaultRecipes = [
     "instructions": [],
     "ingredients": [],
     "comments": [],
-    "initialLikes": 0
+    "likes": 0
   },
   {
     "id": 7,
@@ -141,7 +141,7 @@ const defaultRecipes = [
     "instructions": [],
     "ingredients": [],
     "comments": [],
-    "initialLikes": 0
+    "likes": 0
   },
   {
     "id": 8,
@@ -154,7 +154,7 @@ const defaultRecipes = [
     "instructions": [],
     "ingredients": [],
     "comments": [],
-    "initialLikes": 0
+    "likes": 0
   },
   {
     "id": 9,
@@ -167,7 +167,7 @@ const defaultRecipes = [
     "instructions": [],
     "ingredients": [],
     "comments": [],
-    "initialLikes": 0
+    "likes": 0
   }
 ];
 
