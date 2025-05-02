@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import PostHome from '@/components/Post/PostHome';
 import SideBarUser from '@/components/SideBarUser/SideBarUser.jsx';
 import IconButton from '@/components/Button/IconButton';
-import { getAllUsers, getAllPosts, getLoggedInUser } from '@/services/localStorage';
+import { getAllPosts, getLoggedInUser } from '@/services/localStorage';
 import ManageAccount from '@/components/ManageAccount/ManageAccount';
 import PeopleYouMayKnow from '@/components/PeopleYouMayKnow/PeopleYouMayKnow';
+import { getFormattedDate } from '@/utils/PostUtils';
 import '@/main.css';
 import { CreatePost } from '@/components/Modal/CreatePost';
 import addimage from '@/assets/icons/addimage-darkgrey-outline.png';
@@ -27,12 +28,6 @@ const Home = () => {
   const sortedPosts = [...posts].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
   const loggedInUser = getLoggedInUser();
-  const signUpDate = new Date(loggedInUser.created_at);
-  const signUpDateFormatted = signUpDate.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
 
   const [createPostModalVisible, setCreatePostModalVisible] = useState(false);
   useEffect(() => {
@@ -48,7 +43,7 @@ const Home = () => {
           name={loggedInUser.display_name}
           followers={loggedInUser.followers ? loggedInUser.followers : 0}
           following={loggedInUser.following ? loggedInUser.following : 0}
-          signUpDate={signUpDateFormatted}
+          signUpDate={getFormattedDate(loggedInUser)}
       />      
       <main>
       <div className="card">
