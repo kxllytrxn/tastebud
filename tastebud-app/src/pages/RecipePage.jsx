@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import SideBarUser from '@/components/SideBarUser/SideBarUser.jsx';
 import Button from "@/components/Button/Button.jsx";
-import { getAllUsers, getAllPosts } from '@/services/localStorage';
+import { getLoggedInUser, getAllPosts } from '@/services/localStorage';
+import { getFormattedDate } from '@/utils/PostUtils';
 import defaultRecipes from "@/data/fakeRecipe.jsx"
 import '@/main.css';
 import './styles/RecipePage.css'
@@ -10,6 +11,7 @@ import './styles/RecipePage.css'
 
 const RecipePage = () => {
   const navigate = useNavigate();
+  const loggedInUser = getLoggedInUser();
   const { id } = useParams();
 
   const [recipe, setRecipe] = useState(null);
@@ -29,12 +31,12 @@ const RecipePage = () => {
 
   return (
     <div className="indv-recipe-page">
-      <SideBarUser
-        name={"Kelly Tran"}
-        followers={40}
-        following={23}
-        lastMealDate="Yesterday"
-      />
+      <SideBarUser 
+          name={loggedInUser.display_name}
+          followers={loggedInUser.followers ? loggedInUser.followers : 0}
+          following={loggedInUser.following ? loggedInUser.following : 0}
+          signUpDate={getFormattedDate(loggedInUser)}
+      />  
       <div className="recipe-page-container">
         <div className="back-button-wrapper">
           <Button

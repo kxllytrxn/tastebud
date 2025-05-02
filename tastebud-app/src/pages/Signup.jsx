@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signup } from '@/utils/auth'; 
 import Button from '@/components/Button/Button';
+import logo from '@/assets/icons/tastebud-logo.png';
 import './styles/Login.css';
 
 const Signup = () => {
@@ -25,7 +26,9 @@ const Signup = () => {
   return (
     <div className="signup-container">
       <div className="login-header-bar"></div>
-
+      <div className="logo-container">
+          <img src={logo}/>
+        </div>
       <h2>Sign Up</h2>
       {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>

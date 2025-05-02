@@ -2,17 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import RecipeCard from '@/components/RecipeCard/RecipeCard.jsx';
 import SideBarUser from '@/components/SideBarUser/SideBarUser.jsx';
-import '@/main.css';
-import { getAllPosts, setAllPosts } from '@/services/localStorage';
+import { getAllPosts } from '@/services/localStorage';
 import { printLocalStorage } from '../utils/auth';
 import defaultRecipes from "@/data/fakeRecipe.jsx"
+import { getLoggedInUser } from '@/services/localStorage';
+import { getFormattedDate } from '@/utils/PostUtils';
+import '@/main.css';
+
 
 const Recipes = () => {
     const [recipes, setRecipes] = useState([]);
+    const loggedInUser = getLoggedInUser();
 
     useEffect(() => {
         const storedPosts = getAllPosts();
-        console.log("POSTS: ", storedPosts)
         if (storedPosts.length === 0) {
           setRecipes(defaultRecipes);
         } else {
@@ -21,15 +24,14 @@ const Recipes = () => {
         }
     }, []);
     
-    printLocalStorage()
     return (
         <div className='recipe-page'>
-                <SideBarUser 
-                    name="John Doe"
-                    followers={40}
-                    following={23}
-                    lastMealDate="April 10, 2025"
-                />
+            <SideBarUser 
+                name={loggedInUser.display_name}
+                followers={loggedInUser.followers}
+                following={loggedInUser.following}
+                signUpDate={getFormattedDate(loggedInUser)}
+            />
             <div className="recipe-container">
                 {recipes.map((recipe) => (
                 <Link to={`/recipe/${recipe.id}`} key={recipe.id}>
@@ -42,7 +44,6 @@ const Recipes = () => {
                     />                
                 </Link>
                 ))}
-                
              </div>
         </div>
         
