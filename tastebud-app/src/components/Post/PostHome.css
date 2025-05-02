@@ -79,6 +79,19 @@
     align-items: center;
 }
 
+.post-stat-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stat-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    margin-right: 4px;
+}
+
 .menu-button {
     background: none;
     border: none;
