@@ -5,7 +5,7 @@ import RecipeInstruction from "@/components/RecipeInstruction/RecipeInstruction"
 import Comment from "@/components/Comment/Comment";
 import { DeleteModal } from '@/components/Modal/DeleteModal';
 import { ShareModal } from '@/components/Modal/ShareModal';
-import { getAllPosts, setAllPosts, getLoggedInUser } from "@/services/localStorage";
+import { getAllPosts, setAllPosts, getLoggedInUser, deletePostById } from "@/services/localStorage";
 import { CreatePost } from '@/components/Modal/CreatePost';
 
 
@@ -185,9 +185,9 @@ const PostHome = ({
       {caption && <p className="post-caption">{caption}</p>}
 
       {/* Image */}
-      {image && (
+      {post.image && (
         <img
-          src={image}
+          src={post.image}
           alt="Post"
           className="post-card-img"
         />
