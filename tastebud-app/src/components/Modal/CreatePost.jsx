@@ -5,6 +5,8 @@ import utencilIcon from './modal-icons/utencil.png';
 import plusIcon from './modal-icons/plus.png';
 import { savePostToDB, getLoggedInUser, editPost } from '@/services/localStorage';
 import { v4 as uuidv4 } from 'uuid';
+import aiIcon from '@/assets/icons/ai-wand.png'
+import loadingIcon from '@/assets/icons/loading-orange.gif'
 
 
 export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
@@ -19,6 +21,8 @@ export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [postId, setPostId] = useState(null);
   const [errors, setErrors] = useState({});
+  const [loadingAI, setLoadingAI] = useState(false);
+
 
   // Load post data if editing
   useEffect(() => {
@@ -173,6 +177,43 @@ export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
   const handleAddIngredient = () => {
     setIngredients([...ingredients, '']);
   };
+  
+  const handleAIIngredients = async () => {
+    if (!postTitle || !selectedImage) {
+      alert("Please provide both a title and an image.");
+      return;
+    }
+
+    setLoadingAI(true);
+
+    try {
+      // import fetch from 'node-fetch'; // for node.js
+      const response = await fetch(
+        'https://noggin.rea.gent/horrible-quelea-9698',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer rg_v1_h67cqo3db4qxqfxwljl1dmv3yjaxh0ty356g_ngk',
+          },
+          body: JSON.stringify({
+            // fill variables here.
+            "title": postTitle,
+          }),
+        }
+      ).then(response => response.text());
+      console.log("AI Response (raw text):", response);
+      const ingredients = JSON.parse(response)
+      setIngredients(ingredients);
+      setShowRecipe(true);
+    } catch (error) {
+      console.error("Failed to generate ingredients:", error);
+    }
+    finally {
+      setLoadingAI(false);
+    }
+  };
+
 
   const handleIngredientChange = (index, value) => {
     const newIngredients = [...ingredients];
@@ -410,6 +451,15 @@ export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
             <button className="icon-button">
               <img src={plusIcon} alt="Add" className="modal-icon" />
             </button>
+            <button className="icon-button" onClick={handleAIIngredients}>
+              <img src={aiIcon} alt="Add" className="modal-icon" />
+            </button>
+            {loadingAI && (
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "10px" }}>
+                <img src={loadingIcon} alt="Loading..." style={{ width: "24px", height: "24px" }} />
+                <span style={{ fontSize: "14px" }}>AI is generating ingredients...</span>
+              </div>
+            )}
           </div>
           <div className="footer-right">
             <button className="draft-button" onClick={handleSaveAsDraft}>Save as draft</button>

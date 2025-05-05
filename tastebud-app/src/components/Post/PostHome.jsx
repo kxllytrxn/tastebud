@@ -7,8 +7,9 @@ import { DeleteModal } from '@/components/Modal/DeleteModal';
 import { ShareModal } from '@/components/Modal/ShareModal';
 import { getAllPosts, setAllPosts, getLoggedInUser, deletePostById } from "@/services/localStorage";
 import { CreatePost } from '@/components/Modal/CreatePost';
-import LikeFilled from '@/assets/icons/like-fill.png'
-import LikeOutline from '@/assets/icons/like-outline.png'
+import LikeFilled from '@/assets/icons/like-orange-fill.png'
+import LikeOutline from '@/assets/icons/like-black.png'
+import LikeBlack from '@/assets/icons/like-fill.png'
 import CommentOutline from '@/assets/icons/comment-black-outline.png'
 import ShareOutline from '@/assets/icons/share-black-outline.png'
 
@@ -214,7 +215,7 @@ const PostHome = ({
       {/* Like and Comment Count */}
       <div className="post-stats">
         <span className="post-stat-item">
-          <img src={LikeFilled} alt="likes" className="stat-icon" />
+          <img src={LikeBlack} alt="likes" className="stat-icon" />
           {post.likes} likes
         </span>
         <span className="post-stat-item">
