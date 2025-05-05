@@ -20,8 +20,29 @@ export const logout = () => {
 export const getLoggedInUser = () => {
   const userJSON = localStorage.getItem(LOGGED_IN_USER_KEY);
   const data = JSON.parse(userJSON);
-  data.profile_photo_url = "https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/11688145/pokemon_piplup.png?quality=90&strip=all&crop=0,3.4685863874346,100,93.062827225131"
+  
+  // Only set a default profile image if none exists
+  if (data && !data.profile_photo_url) {
+    data.profile_photo_url = "https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/11688145/pokemon_piplup.png?quality=90&strip=all&crop=0,3.4685863874346,100,93.062827225131";
+  }
+  
   return data ? data : null;
+};
+
+export const updateUser = (updatedUser) => {
+  // Update the logged in user
+  localStorage.setItem(LOGGED_IN_USER_KEY, JSON.stringify(updatedUser));
+  
+  // Also update the user in the users list
+  const users = getAllUsers();
+  const index = users.findIndex(user => user.id === updatedUser.id);
+  
+  if (index !== -1) {
+    users[index] = updatedUser;
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+  }
+  
+  return updatedUser;
 };
 
 export const getAllUsers = () => {

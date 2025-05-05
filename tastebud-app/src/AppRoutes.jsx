@@ -27,7 +27,7 @@ const AppRoutes = () => {
       <Route path="/recipe/:id" element={<PrivateRoute><RecipePage /></PrivateRoute>} />
 
       {/* catch-all for 404s */}
-      <Route path="*" element={<h2> Page under-construction </h2>} />
+      <Route path="*" element={<h2> oh no! page under-construction</h2>} />
     </Routes>
   );
 };
