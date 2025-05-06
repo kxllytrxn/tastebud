@@ -39,8 +39,8 @@
 
 .post-card-img {
     width: 100%;
-    height: auto;
-    max-height: 500px;
+    height: 100%;
+    max-height: 1000px;
     object-fit: cover;
     border-radius: 12px;
     margin: 12px 0;
@@ -127,27 +127,27 @@
 .comment-input::placeholder {
     color: #9ca3af;
 }
-
+/* 
 .img-recipe {
     display: flex;
     flex-direction: row;
     gap: 24px;
     align-items: stretch;
     margin-top: 16px;
-}
+} */
 
 /* Image column */
-.post-card-img {
+/* .post-card-img {
     flex: 1;
     width: 100%;
     height: auto;
     object-fit: cover;
     border-radius: 12px;
     max-height: 350px;
-}
+} */
 
 /* Recipe column */
-.recipe-column {
+/* .recipe-column {
     flex: 1;
     background-color: #e8e7e5;
     border-radius: 12px;
@@ -157,10 +157,8 @@
     flex-direction: column;
     justify-content: space-between;
     max-height: 350px;
-    /* So button goes to the bottom */
 }
 
-/* Optional: make sure RecipeInstruction fills its container */
 .recipe-column>* {
     flex: 1;
-}
+} */

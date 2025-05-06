@@ -76,7 +76,7 @@ const PostProfile = ({
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-
+  console.log(post.image);
 
   // action when liked button is clicked
   const toggleLike = () => {
@@ -91,7 +91,6 @@ const PostProfile = ({
   };
 
   const [newComment, setNewComment] = useState("");
-  // const [allComments, setAllComments] = useState(comments || []);
   const commentInputRef = useRef(null);
 
   const handleAddComment = () => {
@@ -179,13 +178,14 @@ const PostProfile = ({
       {caption && <p className="post-caption">{caption}</p>}
 
       {/* Image */}
-      {image && (
+       {post.image && (
         <img
-          src={image}
+          src={post.image}
           alt="Post"
           className="post-card-img"
         />
       )}
+
 
       {/* Recipe Preview */}
       <RecipeInstruction instructions={instructions} />
