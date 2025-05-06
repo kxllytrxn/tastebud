@@ -6,6 +6,7 @@ import Comment from "@/components/Comment/Comment";
 import { DeleteModal } from '@/components/Modal/DeleteModal';
 import { ShareModal } from '@/components/Modal/ShareModal';
 import { getLoggedInUser, deletePostById } from '../../services/localStorage';
+import { CreatePost } from '@/components/Modal/CreatePost';
 
 // example of an import for utils to getPosts
 // import { getPosts, deletePost, editPost } from '@/utils/PostUtils'; 
@@ -74,6 +75,7 @@ const PostProfile = ({
   const [showMenu, setShowMenu] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
 
   // action when liked button is clicked
@@ -104,6 +106,12 @@ const PostProfile = ({
     }));
     setNewComment("");
   };
+  
+
+  const handleEditClick = () => {
+    setShowMenu(false);
+    setShowEditModal(true);
+  };
 
   const handleDeleteClick = () => {
     setShowMenu(false);
@@ -114,6 +122,16 @@ const PostProfile = ({
     setShowMenu(false);
     setShowShareModal(true);
   };
+
+
+  const handleEditClose = () => {
+    setShowEditModal(false);
+    // Trigger refresh if callback is provided
+    if (onPostUpdated) {
+      onPostUpdated();
+    }
+  };
+
 
   const handleConfirmDelete = () => {
     deletePostById(id);
@@ -146,7 +164,7 @@ const PostProfile = ({
           </button>
           {showMenu && (
             <div className="menu-dropdown">
-              {isCurrentUserPost && <button>Edit</button>}
+              {isCurrentUserPost && <button onClick={handleEditClick}>Edit</button>}
               {isCurrentUserPost && <button onClick={handleDeleteClick}>Delete</button>}
               <button onClick={handleShareClick}>Share</button>
             </div>
@@ -218,6 +236,11 @@ const PostProfile = ({
         visible={showShareModal}
         onClose={() => setShowShareModal(false)}
       />
+      <CreatePost
+              visible={showEditModal}
+              onClose={handleEditClose}
+              postToEdit={post}
+        />
     </div>
   );
 };
