@@ -1,5 +1,5 @@
 import React from 'react';
-import PostProfile from '@/components/Post/PostProfile';
+import PostHome from '@/components/Post/PostHome';
 import ProfileBanner from '@/components/ProfileBanner/ProfileBanner';
 import PeopleYouMayKnow from '@/components/PeopleYouMayKnow/PeopleYouMayKnow';
 import '@/main.css';
@@ -36,7 +36,7 @@ const UserProfile = () => {
           </div>
           {userPosts.length > 0 ? 
             (userPosts.map((post) => (
-              <PostProfile key={post.id} {...post} />
+              <PostHome key={post.id} {...post} />
             ))) :
             <p> No posts found. Create one today! </p>
           }
