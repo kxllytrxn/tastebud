@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import "./PostHome.css";
+import "./PostProfile.css";
 import IconButton from '@/components/Button/IconButton';
 import RecipeInstruction from "@/components/RecipeInstruction/RecipeInstruction";
 import Comment from "@/components/Comment/Comment";

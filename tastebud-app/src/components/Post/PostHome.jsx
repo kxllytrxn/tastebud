@@ -7,6 +7,12 @@ import { DeleteModal } from '@/components/Modal/DeleteModal';
 import { ShareModal } from '@/components/Modal/ShareModal';
 import { getAllPosts, setAllPosts, getLoggedInUser, deletePostById } from "@/services/localStorage";
 import { CreatePost } from '@/components/Modal/CreatePost';
+import LikeFilled from '@/assets/icons/like-orange-fill.png'
+import LikeOutline from '@/assets/icons/like-black.png'
+import LikeBlack from '@/assets/icons/like-fill.png'
+import CommentOutline from '@/assets/icons/comment-black-outline.png'
+import ShareOutline from '@/assets/icons/share-black-outline.png'
+
 
 
 const PostHome = ({
@@ -198,19 +204,26 @@ const PostHome = ({
 
       {/* Actions */}
       <div className="card-footer icon-buttons-container">
-        <IconButton icon={post.liked ? "❤️" : "🤍"} onClick={toggleLike} />
+        <IconButton icon={post.liked ? LikeFilled : LikeOutline} onClick={toggleLike} />
         <IconButton
-          icon="💬"
+          icon = {CommentOutline}
           onClick={() => commentInputRef.current?.focus()}
         />
-        <IconButton icon="🔗" onClick={handleShareClick} />
+        <IconButton icon={ShareOutline} onClick={handleShareClick} />
       </div>
 
       {/* Like and Comment Count */}
       <div className="post-stats">
-        <span>❤️ {post.likes} likes</span>
-        <span>💬 {post.comments.length} comments</span>
+        <span className="post-stat-item">
+          <img src={LikeBlack} alt="likes" className="stat-icon" />
+          {post.likes} likes
+        </span>
+        <span className="post-stat-item">
+          <img src={CommentOutline} alt="comments" className="stat-icon" />
+          {post.comments.length} comments
+        </span>
       </div>
+
 
       {/* Comment */}
       {post.comments.map((c, i) => (

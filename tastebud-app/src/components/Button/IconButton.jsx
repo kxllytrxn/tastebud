@@ -2,7 +2,7 @@ import React from "react";
 import "./Button.css";
 
 const IconButton = ({ icon, onClick, className = "" }) => {
-    const isImageIcon = typeof icon === 'string' && (icon.startsWith('http') || icon.startsWith('/'));    
+    const isImageIcon = typeof icon === 'string'  
     return (
         <button 
             className={`icon-button ${className}`}
