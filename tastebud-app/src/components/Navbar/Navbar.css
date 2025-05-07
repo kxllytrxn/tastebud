@@ -138,6 +138,11 @@ background-color: #0056b3;
   color: var(--white);
   height: var(--navbar-height);
   transition: background-color 0.3s linear;
+  width: 120px;
+  justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .navbar-button:hover {
@@ -147,6 +152,7 @@ background-color: #0056b3;
 .dropdown-arrow {
   font-size: 0.6rem;
   margin-left: 8px;
+  flex-shrink: 0;
 }
 
 

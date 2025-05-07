@@ -18,6 +18,7 @@ import searchIcon from '@/assets/icons/search-white.png'
 const Navbar = () => {
     const navigate = useNavigate();
     const [authenticated, setAuthenticated] = useState(false);
+    const [activeFilter, setActiveFilter] = useState('People');
   
     useEffect(() => {
       setAuthenticated(isAuthenticated());
@@ -41,10 +42,10 @@ const Navbar = () => {
                 <img src={logo} alt="TasteBud Logo" />
             </div>
 
-            <NavbarButton text="People" hasDropdown={true}>
+            <NavbarButton text={activeFilter} hasDropdown={true}>
                 <ul className="dropdown-menu">
-                    <li>People</li>
-                    <li>Recipes</li>
+                    <li onClick={() => setActiveFilter('People')}>People</li>
+                    <li onClick={() => setActiveFilter('Recipes')}>Recipes</li>
                 </ul>
             </NavbarButton>
             
