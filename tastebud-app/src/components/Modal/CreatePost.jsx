@@ -199,6 +199,7 @@ export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
           body: JSON.stringify({
             // fill variables here.
             "title": postTitle,
+            "image": selectedImage,
           }),
         }
       ).then(response => response.text());
