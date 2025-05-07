@@ -164,8 +164,57 @@ const defaultRecipes = [
     "caption": "",
     "timestamp": "March 8, 2025, 12:49 PM",
     "image": "https://www.allrecipes.com/thmb/n5_f3Acw48WLllb28u09xFXlyaM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/4557800-matcha-pancakes-Aiya-America-4x3-1-85cceed4c4e54fab828ea6729640bf59.jpg",
-    "instructions": [],
-    "ingredients": [],
+    "instructions": [
+      "In a large bowl, whisk together 1 cup of all-purpose flour, 1 tablespoon of sugar, 1 teaspoon of baking powder, and 1 tablespoon of matcha powder.",
+      "In a separate bowl, whisk 1 cup of milk, 1 large egg, and 2 tablespoons of melted butter until well combined.",
+      "Pour the wet ingredients into the dry ingredients and stir until just combined. Do not overmix.",
+      "Heat a non-stick skillet or griddle over medium heat and lightly grease with butter or oil.",
+      "Pour about 1/4 cup of batter onto the skillet for each pancake. Cook until bubbles form on the surface, about 2–3 minutes.",
+      "Flip and cook the other side for another 1–2 minutes until golden brown and cooked through.",
+      "Serve warm with whipped cream and a drizzle of maple syrup."
+    ],
+    "ingredients": [
+      "1 cup all-purpose flour",
+      "1 tablespoon sugar",
+      "1 tablespoon matcha powder",
+      "1 teaspoon baking powder",
+      "1 cup milk",
+      "1 large egg",
+      "2 tablespoons melted butter",
+      "Whipped cream",
+      "Maple syrup"
+    ],
+    "comments": [],
+    "likes": 0
+  },
+  {
+    "id": 10,
+    "user":  fakeUser2,
+    "title": "Acai Bowl",
+    "description": "",
+    "caption": "",
+    "timestamp": "May 8, 2025, 12:49 PM",
+    "image": "src/data/pics/acai_bowl.JPG",
+    "instructions": [
+      "Run the frozen acai packet under warm water for 10 seconds to slightly thaw.",
+      "In a blender, combine the frozen acai, frozen banana, frozen blueberries, and almond milk. Blend until smooth and thick. Add more milk if needed, but keep the consistency spoonable.",
+      "Pour the blended mixture into a bowl.",
+      "Top with sliced banana, fresh blueberries, sliced strawberries, and granola.",
+      "Drizzle peanut butter on top.",
+      "Sprinkle with bee pollen if using, and serve immediately."
+    ],
+    "ingredients": [
+      "1 packet frozen acai puree (unsweetened)",
+      "1/2 frozen banana",
+      "1/2 cup frozen blueberries",
+      "1/4 cup almond milk (or any milk of choice)",
+      "1/4 cup fresh blueberries",
+      "2–3 sliced strawberries",
+      "1/2 sliced banana",
+      "1/4 cup granola",
+      "1 tablespoon peanut butter",
+      "1 teaspoon bee pollen (optional)"
+    ],
     "comments": [],
     "likes": 0
   }
