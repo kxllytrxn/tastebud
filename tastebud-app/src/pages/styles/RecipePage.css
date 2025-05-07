@@ -118,3 +118,18 @@
     color: var(--orange);
     font-weight: bold;
 }
+
+.recipe-comments-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.orange {
+    color: var(--orange);
+}
+
+.recipe-section-heading {
+    font-size: 20px;
+    text-align: left;
+
+}
