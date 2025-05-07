@@ -4,7 +4,7 @@ import SideBarUser from '@/components/SideBarUser/SideBarUser.jsx';
 import Button from "@/components/Button/Button.jsx";
 import { getLoggedInUser, getAllPosts } from '@/services/localStorage';
 import { getFormattedDate } from '@/utils/PostUtils';
-import defaultRecipes from "@/data/fakeRecipe.jsx"
+import Comment from "@/components/Comment/Comment";
 import '@/main.css';
 import './styles/RecipePage.css'
 
@@ -91,15 +91,15 @@ const RecipePage = () => {
           )}
 
           {/* insert comment component lauren made in here */}
-          <div className="recipe-section">
-            <h2 className="section-heading orange">Comments</h2>
-            {recipe.comments ? (
+          <div className="recipe-comments-section">
+            <h2 className="recipe-section-heading orange">Comments</h2>
+            {recipe.comments.length > 0 ? (
               recipe.comments.map((comment) => (
-                <div className="comment">
-                  <strong>James Doe</strong><br />
-                  Lorem ipsum dolor amet, consectetur adipiscing elit.
-                </div>
-
+                <Comment 
+                  name={comment.name}
+                  text={comment.text}
+                  avatar={comment.avatar}
+                />
               ))
             ) : (
               <div className="comment"> No comments found :( </div>

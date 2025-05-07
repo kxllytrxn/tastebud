@@ -1,4 +1,4 @@
-.recipe-instructions-container {
+/* .recipe-instructions-container {
   display: flex; 
   background-color: var(--warm-grey);
   padding: 16px;
@@ -46,4 +46,40 @@
 
 .break-line {
   width:50%; text-align:left; margin-left: 0px
+} */
+
+.instruction-box {
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 12px;
+  color: #2D2D2D;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  color: var(--black);
+  border: 2px solid var(--yellow);
+  /* box-shadow: inset 0 0 5px var(--yellow); */
+}
+
+.instruction-box h4 {
+  margin-top: 5px;
+  margin-bottom: 8px;
+}
+
+.instruction-list {
+  list-style: decimal inside;
+  padding: 0;
+  margin: 0;
+}
+
+.instruction-step {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.toggle-instructions {
+  color: var(--orange);
+  cursor: pointer;
+  font-weight: 500;
+  margin-top: 8px;
+  display: inline-block;
 }

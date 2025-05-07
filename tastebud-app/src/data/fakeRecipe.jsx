@@ -194,7 +194,7 @@ const defaultRecipes = [
     "description": "",
     "caption": "",
     "timestamp": "May 8, 2025, 12:49 PM",
-    "image": "src/data/pics/acai_bowl.JPG",
+    "image": "tastebud-app/src/data/pics/acai_bowl.JPG",
     "instructions": [
       "Run the frozen acai packet under warm water for 10 seconds to slightly thaw.",
       "In a blender, combine the frozen acai, frozen banana, frozen blueberries, and almond milk. Blend until smooth and thick. Add more milk if needed, but keep the consistency spoonable.",
