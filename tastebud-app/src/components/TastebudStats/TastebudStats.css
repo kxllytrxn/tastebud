@@ -109,3 +109,10 @@
 .dot.filled {
     background-color: var(--yellow);
 }
+
+.icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    display: block;
+}

@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useTransition } from "react";
 import './TastebudStats.css'
+import utencilIcon from '@/assets/icons/utensils-orange-fill.png'
+import fireIcon from '@/assets/icons/flame-orange.png'
+import likeIcon from '@/assets/icons/like-orange-fill.png'
 
 
 const TastebudStats = ({ meals = 8, streak = 5, likes = 130, heatmapData }) => {
@@ -16,15 +19,18 @@ const TastebudStats = ({ meals = 8, streak = 5, likes = 130, heatmapData }) => {
           <h3>My TasteBud Stats</h3>
           <ul>
             <li>
-              <span className="icon">🍽️</span>
+              {/* <span className="icon">🍽️</span> */}
+              <img src={utencilIcon} alt="Utensil Icon" className="icon"/>
               <strong>{meals}</strong> <em>meals cooked this week</em>
             </li>
             <li>
-              <span className="icon">🔥</span>
+              {/* <span className="icon">🔥</span> */}
+              <img src={fireIcon} alt="Fire Icon" className="icon"/>
               <strong>{streak}</strong> <em>week streak</em>
             </li>
             <li>
-              <span className="icon">👍</span>
+              {/* <span className="icon">👍</span> */}
+              <img src={likeIcon} alt="Liked Icon" className="icon"/>
               <strong>{likes}</strong> <em>total likes</em>
             </li>
           </ul>

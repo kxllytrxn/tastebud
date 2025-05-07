@@ -61,3 +61,22 @@
     font-size: 16px;
     color: #2D2D2D;
 }
+
+.edit-profile-btn {
+    background-color: var(--green);
+    color: var(--white);
+    border: none;
+    font-size: 16px;
+    text-align: left;
+    padding: 12px;
+    transition: background-color 0.2s linear;
+    border-radius: 100px;
+}
+  
+.edit-profile-btn:hover {
+    background-color: var(--yellow);
+    border: none;
+    border-radius: 100px;
+    color: var(--white);
+    cursor: pointer;
+}

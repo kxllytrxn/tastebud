@@ -27,13 +27,8 @@ const ProfileBanner = ({ user, avatar }) => {
             <h2>{user.display_name}</h2>
             <p>{user.followers} followers | {user.following} following</p>
           </div>
-          <IconButton 
-            buttonText="Edit Profile"
-            disabled={false}
-            variant="primary"
-            color="green"
-            onClick={handleEditClick}
-          />
+
+          <button className="edit-profile-btn" onClick={handleEditClick}>Edit Profile</button>
         </div>
 
         {/* Edit Profile Modal */}
