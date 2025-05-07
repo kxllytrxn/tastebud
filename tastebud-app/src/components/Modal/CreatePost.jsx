@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './CreatePost.css'; 
 import picIcon from './modal-icons/pic.png';
 import utencilIcon from './modal-icons/utencil.png';
@@ -22,7 +22,9 @@ export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
   const [postId, setPostId] = useState(null);
   const [errors, setErrors] = useState({});
   const [loadingAI, setLoadingAI] = useState(false);
-
+  
+  // Add ref for recipe section
+  const recipeRef = useRef(null);
 
   // Load post data if editing
   useEffect(() => {
@@ -245,7 +247,13 @@ export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
   };
 
   const toggleRecipe = () => {
-    setShowRecipe(!showRecipe);
+    const newShowRecipe = !showRecipe;
+    setShowRecipe(newShowRecipe);
+    if (newShowRecipe) {
+      setTimeout(() => {
+        recipeRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
   };
 
   if (!visible) return null;
@@ -346,7 +354,7 @@ export const CreatePost = ({ visible, onClose, postToEdit = null }) => {
 
           {showRecipe && (
             <>
-              <div className="recipe-header">
+              <div className="recipe-header" ref={recipeRef}>
                 <h2>New Recipe</h2>
               </div>
               
