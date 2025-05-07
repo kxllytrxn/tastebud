@@ -12,8 +12,7 @@ import LikeOutline from '@/assets/icons/like-black.png'
 import LikeBlack from '@/assets/icons/like-fill.png'
 import CommentOutline from '@/assets/icons/comment-black-outline.png'
 import ShareOutline from '@/assets/icons/share-black-outline.png'
-
-
+import IngredientPill from '@/components/IngredientPill/IngredientPill';
 
 const PostHome = ({
   id,
@@ -137,6 +136,13 @@ const PostHome = ({
   const handleEditClose = () => {
     setShowEditModal(false);
     // Trigger refresh if callback is provided
+
+  // Reload updated post from localStorage
+  const allPosts = getAllPosts();
+  const updatedPost = allPosts.find(p => p.id === id);
+  if (updatedPost) {
+    setPost(updatedPost);
+  }
     if (onPostUpdated) {
       onPostUpdated();
     }
@@ -200,7 +206,8 @@ const PostHome = ({
       )}
 
       {/* Recipe Preview */}
-      <RecipeInstruction instructions={instructions} />
+      <RecipeInstruction instructions={post.instructions} />
+      <IngredientPill ingredients={post.ingredients}/>
 
       {/* Actions */}
       <div className="card-footer icon-buttons-container">

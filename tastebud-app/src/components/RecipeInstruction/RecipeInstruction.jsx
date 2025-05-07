@@ -1,30 +1,27 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import './RecipeInstruction.css';
 
 const RecipeInstruction = ({ instructions }) => {
-    const [expandedRecipe, setExpandedRecipe] = useState(false);
-    const display_limit = 2;
-    const visibleInstructions = expandedRecipe ? instructions : instructions.slice(0, display_limit);
+  const [showAll, setShowAll] = useState(false);
+  const displayedInstructions = showAll ? instructions : instructions.slice(0, 3);
+  if (!instructions || instructions.length === 0) return null;
 
-    if (!instructions || instructions.length === 0) return null;
-    return (
-       <div className="recipe-instructions-container">
-         <div className="recipe-instructions">
-            <h4>Instructions</h4>
-            <ol className="instruction-list">
-                {visibleInstructions.map((step, idx) => (
-                <li key={idx}>{step}</li>
-                ))}
-            </ol>
-            {instructions.length > display_limit && (
-                // later replace this with one our buttons
-                <button className="see-more-btn" onClick={() => setExpandedRecipe(!expandedRecipe)}>
-                {expandedRecipe ? 'See Less' : 'See More'}
-                </button>
-            )}
-        </div>
-       </div>
-    );
-}
+  return (
+    <div className="instruction-box">
+        <h4> Recipe:</h4>
+      <ol className="instruction-list">
+        {displayedInstructions.map((step, idx) => (
+          <li key={idx} className="instruction-step">{step}</li>
+        ))}
+      </ol>
+      {instructions.length > 3 && (
+        <span className="toggle-instructions" onClick={() => setShowAll(!showAll)}>
+          {showAll ? 'See less' : 'See more...'}
+        </span>
+      )}
+    </div>
+  );
+};
 
 export default RecipeInstruction;
+
