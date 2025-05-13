@@ -10,7 +10,7 @@ Make sure you have Node.js and NPM installed. If you don't have them, follow the
 
 [Instructions to install Node/NPM](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 
-Once you've cloned this repo, run these commands:
+Once you've cloned this repo, run these commands inside the main directory:
 ```bash
   cd tastebud-app
   npm install
