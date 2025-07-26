@@ -1,6 +1,10 @@
 # Tastebud
 CS160 Final Group Project - Tastebud
 
+
+DEMO: https://www.youtube.com/watch?v=vmmFaEuY-nA
+
+
 Tastebud is a food sharing and recipe discovery platform that allows users to interact with others through home-cooking. We hope to inspire others to choose home-cooking over eating out through sharing recipes and meals with friends, and having incentives such as streaks. <3
 
 
